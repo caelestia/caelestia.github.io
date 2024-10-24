@@ -1,4 +1,6 @@
-# caelestia's math center
+---
+layout: default
+---
 
 ## Hello
 
