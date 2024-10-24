@@ -23,4 +23,4 @@ Format of exercises: Ex (book) description index
 
 ## 2024/Oct
 
-[Ex (Global Caluculus) definition of sheaves Ch.1] (./24/1024.md)
+[Ex (Global Caluculus) definition of sheaves Ch.1] (24/1024.md)
