@@ -2,6 +2,8 @@
 layout: default
 ---
 
+(º﹃º )
+
 ## Hello
 
 各位, 早上好, 中午好, 晚上好.
