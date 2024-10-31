@@ -1,7 +1,9 @@
-theme: minima
-
 title: "caelestia's math center"
 description: ""
-author:
-  name: caelestia
-  email: ""
+author: caelestia
+
+remote_theme: jekyll/minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
