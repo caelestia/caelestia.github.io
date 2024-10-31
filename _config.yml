@@ -2,8 +2,4 @@ title: "caelestia's math center"
 description: ""
 author: caelestia
 
-remote_theme: jekyll/minima
-
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
+theme: minima
