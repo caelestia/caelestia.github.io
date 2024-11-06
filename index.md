@@ -1,5 +1,3 @@
-## 2024/Nov
-
 
 
 (º﹃º )
@@ -26,4 +24,5 @@ Creation of this page.
 ## 2024/Nov
 
 [First Post! Random linear algebra question](https://caelestia.github.io/2024/1104.html)
+[Definition of cofibration map](https://caelestia.github.io/2024/1105.html)
 <!-- append -->
