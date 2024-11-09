@@ -26,4 +26,6 @@ Creation of this page.
 [First Post! Random linear algebra question](https://caelestia.github.io/2024/1104.html)
 
 [Definition of cofibration map](https://caelestia.github.io/2024/1105.html)
+
+[Existence of primitive roots](https://caelestia.github.io/2024/1106.html)
 <!-- append -->
