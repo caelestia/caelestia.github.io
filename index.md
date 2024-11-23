@@ -15,7 +15,7 @@ Find me at [github](https://github.com/caelestia), or QQ 2150341750, if necessar
 
 # Posts
 
-Format of exercises: Ex (book) description index
+Format of exercises: Ex (book) description
 
 ## 2024/Oct
 
@@ -28,4 +28,10 @@ Creation of this page.
 [Definition of cofibration map](https://caelestia.github.io/2024/1105.html)
 
 [Existence of primitive roots](https://caelestia.github.io/2024/1106.html)
+
+<!-- [Paracompact spaces and partition of unity](https://caelestia.github.io/2024/1109.html) -->
+
+<!-- [Exercise (Global Calculus) Complex vector bundle?](https://caelestia.github.io/2024/1110.html) -->
+
+[No countable Galois groups](https://caelestia.github.io/2024/1121.html)
 <!-- append -->
