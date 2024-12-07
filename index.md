@@ -34,4 +34,10 @@ Creation of this page.
 <!-- [Exercise (Global Calculus) Complex vector bundle?](https://caelestia.github.io/2024/1110.html) -->
 
 [No countable Galois groups](https://caelestia.github.io/2024/1121.html)
+
+[Galois exercises~](https://caelestia.github.io/2024/1123.html)
+
+## 2024/Dec
+
+[Galois Exercise 2](https://caelestia.github.io/2024/1204.html)
 <!-- append -->
