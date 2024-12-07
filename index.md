@@ -40,4 +40,6 @@ Creation of this page.
 ## 2024/Dec
 
 [Galois Exercise 2](https://caelestia.github.io/2024/1204.html)
+
+[Similarity of matrices and field extension](https://caelestia.github.io/2024/1207.html)
 <!-- append -->
