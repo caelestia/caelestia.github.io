@@ -31,8 +31,6 @@ Creation of this page.
 
 <!-- [Paracompact spaces and partition of unity](https://caelestia.github.io/2024/1109.html) -->
 
-<!-- [Exercise (Global Calculus) Complex vector bundle?](https://caelestia.github.io/2024/1110.html) -->
-
 [No countable Galois groups](https://caelestia.github.io/2024/1121.html)
 
 [Galois exercises~](https://caelestia.github.io/2024/1123.html)
@@ -41,5 +39,9 @@ Creation of this page.
 
 [Galois Exercise 2](https://caelestia.github.io/2024/1204.html)
 
-[Similarity of matrices and field extension](https://caelestia.github.io/2024/1207.html)
+<!-- [Similarity of matrices and field extension](https://caelestia.github.io/2024/1207.html)/ -->
+
+## 2025/Feb
+
+[Example: locally compactness in the adjunction](https://caelestia.github.io/2025/0201.html)
 <!-- append -->
