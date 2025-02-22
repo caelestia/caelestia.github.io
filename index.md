@@ -6,12 +6,14 @@
 
 各位, 早上好, 中午好, 晚上好.
 
-This is my stupid blog for casual,
-everyday math topics. In other words, this is an attempt to keep me writing down stuff and doing exercises, interesting or not. 
+This is my blog for casual,
+everyday math topics. Also, an attempt to keep me writing down stuff and doing exercises. 
+
+Still figuring out how to write in English.
 
 <!-- I'm also working on a slightly more well-ordered notes on analysis and differential geometry at [Calculus](https://github.com/caelestia/Calculus). -->
 
-Find me at [github](https://github.com/caelestia), or QQ 2150341750, if necessary. Please tell me if anything I wrote is wrong.
+Find me at [github](https://github.com/caelestia). Please tell me if anything I wrote is wrong.
 
 # Posts
 
@@ -44,4 +46,6 @@ Creation of this page.
 ## 2025/Feb
 
 [Example: locally compactness in the adjunction](https://caelestia.github.io/2025/0201.html)
+
+[First encounter with convex sets](https://caelestia.github.io/2025/0221.html)
 <!-- append -->
