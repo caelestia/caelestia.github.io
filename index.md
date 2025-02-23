@@ -48,4 +48,6 @@ Creation of this page.
 [Example: locally compactness in the adjunction](https://caelestia.github.io/2025/0201.html)
 
 [First encounter with convex sets](https://caelestia.github.io/2025/0221.html)
+
+[Fundamental theorem of algebra](https://caelestia.github.io/2025/0222.html)
 <!-- append -->
