@@ -50,4 +50,6 @@ Creation of this page.
 [First encounter with convex sets](https://caelestia.github.io/2025/0221.html)
 
 [Fundamental theorem of algebra](https://caelestia.github.io/2025/0222.html)
+
+[Pushing out in Top](https://caelestia.github.io/2025/0223.html)
 <!-- append -->
