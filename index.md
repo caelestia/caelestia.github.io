@@ -52,4 +52,6 @@ Creation of this page.
 [Fundamental theorem of algebra](https://caelestia.github.io/2025/0222.html)
 
 [Pushing out in Top](https://caelestia.github.io/2025/0223.html)
+
+[CW complexes part 1](https://caelestia.github.io/2025/0227.html)
 <!-- append -->
