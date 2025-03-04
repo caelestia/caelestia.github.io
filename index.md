@@ -54,4 +54,8 @@ Creation of this page.
 [Pushing out in Top](https://caelestia.github.io/2025/0223.html)
 
 [CW complexes part 1](https://caelestia.github.io/2025/0227.html)
+
+## 2025/Mar
+
+<!-- [CW complexes part 2](https://caelestia.github.io/2025/0302.html) -->
 <!-- append -->
