@@ -58,4 +58,6 @@ Creation of this page.
 ## 2025/Mar
 
 <!-- [CW complexes part 2](https://caelestia.github.io/2025/0302.html) -->
+
+[Fundamental theorem of algebra, yet another proof](https://caelestia.github.io/2025/0306.html)
 <!-- append -->
