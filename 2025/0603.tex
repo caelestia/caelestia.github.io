@@ -1,0 +1,268 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{commands}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+
+\begin{document}
+\puttitle{Semisimple modules and rings}\self
+
+\section{Semisimple Modules}
+
+In the first part of this note, we give a criterion for semisimple modules.
+
+\begin{definition}
+    An $R$-module $M$, unless stated otherwise, refers to a right $R$-module. Recall that $M$ is simple if its only submodules are $0$ and $M$ itself.
+\end{definition} 
+
+Clearly $D:=\End_R(M)$ is a division ring. Also, $\End_R(M^n)\simeq\Mat{n}(D)$.
+
+\begin{definition}\label{def.semisimple}
+    We say $M$ is semisimple if it is a direct sum of simple modules, and $R$ is semisimple (as a ring) if all $R$-modules are semisimple. 
+\end{definition}
+
+By collecting the isomorphic summands, we have the \emph{isotypic decomposition}
+\begin{equation}
+    M\simeq \bigoplus_{i\in I}L_i^{d_i},
+\end{equation}
+where the invariants $\{L_i\}$: mutually non-isomorphic simple submodules, $D_i=\End_R(L_i)$, $d_i>0$.
+
+If $I$ and all $d_i$'s are finite, we see that $d_i=\dim_{D_i}(\hom(L_i,M))$, and
+\begin{equation}\label{eq.ssring}
+    \End_R (M)\simeq\prod_{i\in I}\Mat{d_i}(D_i)
+\end{equation}
+
+\begin{lemma}
+    If $M$ is semisimple and $N\subset M$ is a submodule, then $N$ is a direct summand of $M$. 
+    In other words, all short exact sequences
+    \begin{equation*}
+        0 \longrightarrow N \longrightarrow M \longrightarrow M/N \longrightarrow 0
+    \end{equation*}
+    split.
+\end{lemma} 
+
+\begin{proof}
+    Let $M=\bigoplus_{i\in I}L_i$ where $L_i$ are simple. 
+    With Zorn's lemma, pick a maximal $J\subset I$ such that $N\cap \sum_{j\in J}L_j=\varnothing$.
+    To see $N+\sum_{j\in J}L_j=M$, we just need to notice that it contains every $L_i$.
+\end{proof}
+
+
+\begin{corollary}\label{cor.sssubquot}
+    Subquotients and sums of semisimple modules are semisimple.
+\end{corollary}
+
+\begin{proof}
+    First part is clear from the proof. For a sum of semisimple modules $M_i$, note the surjective map $\bigoplus_{i}M_i\twoheadrightarrow\sum_iM_i$.
+\end{proof}
+
+\begin{proposition}
+    The converse of Lemma 1 is also true.
+\end{proposition}
+
+\begin{proof}
+    Define the socle of $M$ as 
+    \begin{equation*}
+        \soc(M)=\sum\left\{N\subset M:\text{simple submodule}\right\}.
+    \end{equation*}
+    By Corollary \ref{cor.sssubquot}, $\soc(M)$ is the maximal semisimple submodule in $M$. By assumption we have $M\simeq \soc(M)\oplus H$ for some $H\subset M$. The conclusion follows from the following two lemmas.
+\end{proof}
+
+\begin{lemma}
+    Simple modules.
+    \begin{enumerate}[nosep]
+        \item A proper submodule $N\subset M$ is maximal if and only if $M/N$ is simple.
+        \item Every nonzero finitely generated module has a maximal submodule.
+        \item Every nonzero module has a simple subquotient.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    1 is trivial. 3 follows from 2 because the cyclic submodule $aR$ is finitely generated.
+
+    For 2, we use Zorn's lemma. Pick $a\in M\setminus\{0\}$. Put
+    \begin{equation*}
+        \mathcal{S}=\{N\subset M:\text{proper submodule}\},
+    \end{equation*}
+    ordered by inclusion. Then $0\in \mathcal{S}$. Every chain 
+    \begin{equation*}
+        N_1\subset N_2\subset \cdots\subset N_n\subset \cdots
+    \end{equation*}
+    in S eventually stabilizes since $M$ is finitely generated. Thus the union $N=\bigcup_{i}N_i$ is in $\mathcal{S}$.
+    By Zorn's lemma, there is a maximal element $\mathcal{S}$. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    If every submodule of $M$ is a direct summand, then any subquotient of $M$ also has this property.
+\end{lemma}
+
+\begin{proof}
+    Suppose
+    \begin{equation*}
+        V\subset N\subset M,\quad M=N\oplus N'=V\oplus V'.
+    \end{equation*}
+    Then we have $N=V\oplus(V'\cap N)$, so submodules inherit this property.
+
+    If a module has this property, then a quotient is isomorphic to a submodule.
+    Hence, every subquotient of $M$ is isomorphic to a submodule. This completes the proof.
+\end{proof}
+
+\section{Semisimple Rings}
+
+In this section, we give the classification of semisimple rings (definition \ref{def.semisimple}).
+
+\begin{lemma}
+    Let $R$ be a ring. Denote by $\RMod{R}$ the category of right $R$-modules. Let $\{e_{ij}\}$ be the standard basis of $\Mat{n}(R)$. 
+    Then the functors
+    \begin{equation*}
+        M \longmapsto M^{\oplus n},\quad Ne_{11}\longmapsfrom N
+    \end{equation*}
+    gives an equivalence of categories $\RMod{R}\simeq\RMod{\Mat{n}(R)}$.
+\end{lemma}
+
+\begin{proof}
+    One way of composing the functors clearly gives (up to natural isomorphism) the identity functor $M\longmapsto M$. The other order gives
+    \begin{equation*}
+        N\longmapsto (Ne_{11})^{\oplus n}\simeq 
+        \bigoplus_{i=1}^n Ne_{ii}\simeq N.
+    \end{equation*}
+    The last isomorphism follows from the fact that $e_{ii}$ is a set of orthogonal idempotents in $\Mat{n}(R)$ that sums to $1$.
+\end{proof}
+
+\begin{corollary}\label{cor.matDss}
+    Let $D$ be a division ring. 
+    Then $\Mat{n}(D)$ is a semisimple ring, and every simple right $\Mat{n}(D)$-module is isomorphic to $D^n$.
+\end{corollary}
+
+\begin{proof}
+    We know $\RMod{D}$ pretty well; it's called linear algebra.
+\end{proof}
+
+Recall the following result.
+\begin{proposition}\label{prop.prodRings}
+    Let $R=\prod_{i}R_i$ be a finite product of rings. Let $e_i$ be the corresponding idempotents and $\pi_i$ be the projections onto $R_i$. 
+    Then the functors
+    \begin{equation*}
+        M \longmapsto (Me_i)_i,\quad 
+        \bigoplus_{i}\pi_i^*N_i \longmapsfrom (N_i)_i
+    \end{equation*}
+    give an equivalence of categories $\RMod{R}\simeq\prod_{i}\RMod{R_i}$.
+    Here $\pi_i^*$ denotes the pullback functor along $\pi_i$.
+\end{proposition}
+
+\begin{proof}
+    One direction of composing the functors is trivial.
+    The other is easy once idempotents are understood.
+\end{proof}
+
+\begin{lemma}
+    If $f:R\to S$ is a surjective ring homomorphism, then the pullback functor $f^*:\RMod{S}\to\RMod{R}$ sends simple $S$-modules to simple $R$-modules.
+\end{lemma}
+
+\begin{proof}
+    Any $R$-submodule has to be an $S$-submodule as well.
+\end{proof}
+
+\begin{theorem}\label{thm.ssring}
+    Semisimple rings. TFAE:
+    \begin{enumerate}[nosep]
+        \item $R$ is a semisimple ring.
+        \item $R$ is semisimple as a module over itself.
+        \item $R$ has a factorization as in (\ref{eq.ssring}), i.e., a \emph{finite} product of matrix algebras over division rings.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    1 $\Rightarrow$ 2: trivial.
+
+    2 $\Rightarrow$ 3: $R^\op=\End_R(R)$. If we know that as a module $R$ is only a \emph{finite} direct sum of simple modules, then (\ref{eq.ssring}) follows. But this is clear, as $R$ is finitely generated.
+
+    3 $\Rightarrow$ 1: By Corollary \ref{cor.matDss}, $R$ is a finite product of semisimple rings.
+    We wish to show that the second functor in Proposistion \ref{prop.prodRings} sends (a vector of) semisimple modules to semisimple $R$-modules.
+    
+    Each $\pi_i$ is surjective, so $\pi_i^*$ preserves simple modules by the above lemma.
+
+    It's well-known that the pullback commutes with both limits and colimits because they have both left and right adjoints (the two 'base change' functors). In particular, $\pi_i^*$ commutes with direct sums.
+    This completes the proof.
+\end{proof}
+
+\section{Wedderburn's Theorem}
+
+\begin{definition}
+    A ring $R$ is simple if it has not nontrivial two-sided ideals.
+\end{definition}
+
+\begin{remark}
+    Obviously, a semisimple ring need not be simple, since we've shown that it can be a product of two rings.
+
+    However, a simple ring $R$ need not be semisimple either.
+    Two examples are provided below.
+\end{remark}
+
+\begin{definition}
+    A ring $R$ is left (resp. right) Artinian if it is Artinian as a left (resp. right) $R$-module.
+\end{definition}
+
+\begin{theorem}[Wedderburn]
+    TFAE:
+    \begin{enumerate}[nosep]
+        \item $R$ is simple and semisimple.
+        \item $R$ is a matrix algebra over a division ring.
+        \item $R$ is simple and right (or left) Artinian.
+        \item $R$ is semisimple and all simple $R$-modules are isomorphic.
+    \end{enumerate} 
+\end{theorem}
+
+\begin{proof}
+    1 $\Rightarrow$ 2 is clear. 2 $\Rightarrow$ 4 is Corollary \ref{cor.matDss}.
+
+    2 $\Rightarrow$ 3: $R=\Mat{n}(D)$ is a finite-dimensional $D$-vector space, hence Artinian.
+
+    3 $\Rightarrow$ 1: Since $R$ is right (say) Artinian, it has a minimal right ideal $\mathfrak{a}$.
+    Then $R\mathfrak{a}$ is a nonzero two-sided ideal, hence $R=R\mathfrak{a}$.
+    Therefore, as an $R$-module, $R$ is a quotient of $\bigoplus_{r\in R}\mathfrak{a}$, hence semisimple by Corollary \ref{cor.sssubquot} and Therorem \ref{thm.ssring}.
+
+    4 $\Rightarrow$ 2: The isotypic decomposition of $R_R$ only has one term, so $R^\op=\End_R(R)$ is a matrix algebra over a division ring.
+\end{proof}
+
+\begin{example}
+    Any simple ring that's not Artinian is therefore not semisimple.
+    
+    Let $k$ be a field, $E$ be a $k$-vector space of countably infinite dimension, and $R=\End_k(E)$.
+    Notice that $m=\{f\in R:\rk(f)<\infty\}$ is a maximal \emph{two-sided} ideal. Indeed, if $f\in R\setminus m$, then $f$ induces an isomorphism between two subspaces, both of which are isomorphic to $E$. Hence $1\in RfR$ and $m$ is maximal. We see that $R/m$ is a simple ring.
+
+    However, $R/m$ is clearly not left Artinian. Let $\{e_1,e_2,\cdots\}$ be a basis of $E$. Then
+    \begin{equation*}
+        I_k=m+\left\{f\in R:k!\nmid n\Longrightarrow f(e_n)=0\right\}
+    \end{equation*}
+    is a descending chain of left ideals of $R$ which does not stabilize.
+\end{example}
+
+\begin{example}
+    Another standard example is the Weyl algebra, defined by
+    \begin{equation*}
+        W = \C\langle x,\partial_x\rangle := T(V)/(p\otimes q-q\otimes p-1)
+    \end{equation*}
+    where $T$ denotes the tensor algebra, and $V$ is a $\C$-vector space with basis $\{p,q\}$. This can be viewed as the \emph{canonical commutation relation} from quantum mechanics. We see that
+    \begin{itemize}[nosep]
+        \item $W$ is spanned by $x^i{\partial_x}^j$ for $i,j\in\N$;
+        \item $W$ is simple, seen by applying $[\partial_x,-]$ multiple times;
+        \item $W$ is not a division ring, but it also has no nonzero zero-divisors. Easily seen by inspecting the leading term in $\partial_x$.
+    \end{itemize}
+    By clause 2 of Wedderburn's theorem, we conclude that $W$ cannot be semisimple.
+\end{example}
+
+\section*{The End}
+
+This note partially follows \href{https://ocw.mit.edu/courses/18-706-noncommutative-algebra-spring-2023/mit18_706_s23_full_lec.pdf}{Noncommutative algebra}.
+
+\noindent Compiled on \todayymd.
+
+\noindent\home
+
+\end{document}

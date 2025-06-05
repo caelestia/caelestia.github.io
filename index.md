@@ -60,4 +60,14 @@ Creation of this page.
 <!-- [CW complexes part 2](https://caelestia.github.io/2025/0302.html) -->
 
 [Fundamental theorem of algebra, yet another proof](https://caelestia.github.io/2025/0306.html)
+
+## 2025/May
+
+<!-- [Binomial Series??](https://caelestia.github.io/2025/0503.html) -->
+
+## 2025/Jun
+
+[Units in R[X]](https://caelestia.github.io/2025/0602.html)
+
+[Semisimple modules and rings](https://caelestia.github.io/2025/0603.pdf)
 <!-- append -->
