@@ -1,0 +1,114 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{commands}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+
+\begin{document}
+\puttitle{The series expansion of log(2) and Abel's Theorem}\self
+
+In this note, we prove the following formula
+\begin{equation}\label{eq:log2}
+    \log(2) = \sum_{n=1}^\infty \frac{(-1)^{n+1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots
+\end{equation}
+from the series expansion of $\log(1+x)$, which is
+\begin{equation}\label{eq:log1+x}
+    \log(1+x) = \sum_{n=1}^\infty \frac{(-1)^{n+1}}{n} x^n,\quad \vert x\vert < 1.
+\end{equation}
+Here everything in \eqref{eq:log1+x} are assumed to be known. We will show that (i) the series in \eqref{eq:log2} converges, (ii) given the convergence, the series in \eqref{eq:log1+x} is continuous near $x=1$.
+
+\begin{proposition}[Dirichlet's test]
+    Let $\{a_n\}_{n\geq 1}$ be a sequence of complex numbers and denote its partial sums as $A_n:=\sum_{k=1}^n a_k$. Suppose that the partial sum is bounded:
+    \[
+        \exists M>0,\ \vert A_n\vert \leq M \text{ for all } n\geq 1.
+    \]
+    Let $\{b_n\}_{n\geq 1}$ be a sequence of real numbers that monotonically decreases to $0$. Then the series $\sum_{k=1}^\infty a_k b_k$ converges, and we have
+    \[
+        \left\vert \sum_{k=1}^\infty a_kb_k \right\vert \leq Mb_1.
+    \]
+\end{proposition}
+
+\begin{proof}
+    First, we derive the usual summation by parts. 
+    \[
+        A_{k+1}b_{k+1}-A_kb_k = a_{k+1}b_{k+1}+A_k(b_{k+1}-b_k).
+    \]
+    Summing this from $k=1$ to $n-1$, we obtain
+    \[
+        A_{n}b_{n} - A_1b_1 = \sum_{k=2}^{n} a_{k}b_{k} + \sum_{k=1}^{n-1} A_k(b_{k+1}-b_k).
+    \]
+    The result follows easily from this.
+\end{proof}
+
+\begin{remark}
+    Replace $A_k$ by $a_k$ and $a_k$ by $(\Delta a)_{k-1}$ to obtain the 'more standard' summation by parts formula.
+\end{remark}
+
+\begin{corollary}\label{cor}
+    Suppose that $\mu\in\C\setminus\{1\}$ and $\vert \mu\vert \leq 1$. Let $\{b_n\}_{n\geq 1}$ be a sequence of real numbers that monotonically decreases to $0$. Then the series $\sum_{k=1}^\infty \mu^{k} b_k$ converges, and we have
+    \[
+        \left\vert \sum_{k=1}^\infty \mu^{k} b_k \right\vert \leq \frac{2}{\vert 1-\mu \vert} b_1.
+    \]
+\end{corollary}
+
+\begin{proof}
+    Obvious.
+\end{proof}
+
+\begin{corollary}[Alternating series test]
+    Let $\{b_n\}_{n\geq 1}$ be a sequence of real numbers that monotonically decreases to $0$. Then the series $\sum_{k=1}^\infty (-1)^{k+1} b_k$ converges, and we have
+    \[
+        \left\vert \sum_{k=1}^\infty (-1)^{k+1} b_k \right\vert \leq b_1.
+    \]
+\end{corollary}
+
+\begin{proof}
+    Obvious.
+\end{proof}
+
+In particular, \eqref{eq:log2} converges. Now we prove the second part.
+
+\begin{theorem}[Abel]
+    Let $f(x) = \sum_{n=1}^\infty a_n (z-z_0)^n$ be a power series with finite radius of convergence $R>0$. Suppose that there is a point $\zeta=z_0+Re^{i\theta}$ such that the series $\sum_{n=1}^\infty a_n (\zeta-z_0)^n$ converges. 
+    
+    Then the power series converges uniformly on the segment $[z_0, \zeta]$. In particular, we have
+    \[
+        f(\zeta) = \lim_{r\to R^-} f(z_0+re^{i\theta}).
+    \]
+\end{theorem}
+
+\begin{proof}
+    WLOG assume $z_0=0$. By considering the series $\sum_{n=1}^\infty a_n \left(Re^{i\theta}\right)^n z^n$ for $r\in [0,R)$, we may also assume $\zeta=1$. Now we have $f(x) = \sum_{n=1}^\infty a_n z^n$ and the convergence of the series $\sum_{n=1}^\infty a_n$. We need to prove the result for the interval $[0,1]$.
+
+    Fix $\varepsilon>0$. By Cauchy's criterion, there exists $N$ such that 
+    \begin{equation*}
+        m\geq n\geq N \Longrightarrow \left\vert \sum_{k=n}^m a_k \right\vert < \varepsilon.
+    \end{equation*}
+
+    For any $n\geq N$ and $x\in[0,1)$, Dirichlet's test applies to the sequences $\{a_{k+n}\}_{k\geq 1}$ and $\{x^{k+n}\}_{k\geq 1}$, showing that the series $\sum_{k=1}^\infty a_{k+n} x^{k+n}=\sum_{k=n+1}^\infty a_kx^k$ converges on $[0,1)$. More importantly, we have the estimate
+    \[
+        \left\vert \sum_{k=n+1}^\infty a_k x^k \right\vert \leq \varepsilon x^{n+1} <\varepsilon.
+    \]
+    Combining with the obvious fact that $\left\vert \sum_{k=n+1}^\infty a_k \right\vert \leq \varepsilon$, we see that
+    \[
+        n\geq N \Longrightarrow \sup_{x\in[0,1]} \left\vert f(x) - \sum_{k=1}^n a_k x^k \right\vert \leq \varepsilon.
+    \]
+    This shows the uniform continuity on $[0,1]$. Therefore, $f$ is continuous on $[0,1]$.
+\end{proof}
+
+This proves \eqref{eq:log2}.
+
+By Corollary \ref{cor}, it is easy to see that the series in \eqref{eq:log1+x} converges everywhere on the boundary $\vert x\vert = 1$ except at $x=-1$ --- not just at $x=1$. Hence with Abel's theorem we might obtain some other things. We won't do that here.
+
+\section*{The End}
+
+\noindent Compiled on \todayymd.
+
+\noindent\home
+
+\end{document}

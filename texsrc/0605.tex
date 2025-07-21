@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{commands}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+
+\begin{document}
+\puttitle{Central simple algebras}\self
+
+This is a follow-up to \href{https://caelestia.github.io/2025/0603.pdf}{the previous note}.
+
+\section{Central simple algebras}
+
+Fix a field $k$.
+
+\begin{definition}
+    An algebra $A$ over $k$ is called \emph{central} if the center of $A$ is the image of $k\hookrightarrow A$.
+\end{definition}
+
+\begin{example}
+    The quaternions $\mathbb{H}$ form a central division algebra over $\R$.
+    
+    Moreover, the only such algebras are $\R$ and $\mathbb{H}$. This is a consequence of the Frobenius theorem. Let's see why this is the case. Suppose $A$ is a real division algebra with $\dim_{\R}(A)\geq 2$. Pick any element $x\in A\setminus \R$ and we identify $\C\simeq \R[x]\subset A$. In particular, $A$ is a $\C$-vector space.
+
+    Let $\varphi:a\mapsto iai^{-1}$ where $i^2=-1$. This is a $\C$-linear involution of $A$, i.e., $\varphi^2=\id$. Thus the possible eigenvalues of $\varphi$ are $\pm 1$, and we can decompose $A$ as a direct sum of eigenspaces:
+    \begin{equation*}
+        A = U_1\oplus U_{-1}.
+    \end{equation*}
+    Then $U_1$ is a finite dimensional $\C$-algebra, hence $U_1=\C$ as $\C$ is algebraically closed. If $U_{-1}=0$ then $A=\C$. Otherwise, pick $j\in U_{-1}\setminus\{0\}$. Left multiplication by $j$ gives a $\C$-linear map $U_{-1}\hookrightarrow U_{1}$, so we must have $\dim_{\C}(U_{-1})=\dim_{\C}(U_{1})=1$.
+
+    Now, $j^2\in U_1=\C$. But we also have $j^2\in \R\oplus\R j$ due to the minimal polynomial of $j$ having degree $2$. Thus $j^2\in\R$. It is clear that $j^2<0$. We see that $A=\C\oplus\C\cdot j/\sqrt{-j^2}$ is identified with $\mathbb{H}$.
+\end{example}
+
+
+
+\section{Brauer group}
+
+
+
+
+\section*{The End}
+
+
+
+\noindent Compiled on \todayymd.
+
+\noindent\home
+
+\end{document}

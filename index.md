@@ -70,4 +70,16 @@ Creation of this page.
 [Units in R[X]](https://caelestia.github.io/2025/0602.html)
 
 [Semisimple modules and rings](https://caelestia.github.io/2025/0603.pdf)
+
+[Central simple algebras](https://caelestia.github.io/2025/0605.pdf)
+
+<!-- [Witt's theorem of quadratic forms](https://caelestia.github.io/2025/0606.pdf) -->
+
+## 2025/Jul
+
+[Fundamental theorem of symmetric polynomials](https://caelestia.github.io/2025/0714.pdf)
+
+[Covering spaces over the wrong space](https://caelestia.github.io/2025/0715.pdf)
+
+[The series expansion of log(2) and Abel's Theorem](https://caelestia.github.io/2025/0717.pdf)
 <!-- append -->

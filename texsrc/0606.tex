@@ -1,0 +1,547 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{commands}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+\newtheorem*{exercise}{Exercise}
+\newcommand{\rad}{\operatorname{rad}}
+\newcommand{\GW}{\widehat{W}}
+% \newcommand{\qa}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
+\newcommand{\qa}[2]{\left(#1\right)_{#2}}
+
+\begin{document}
+\puttitle{Witt's theorem of quadratic forms}\self
+
+\begin{quote}
+    The following suspicious problem appears in a random centest problem set for reasons beyond my comprehension. I attempted it and successfully failed.
+\end{quote}
+
+\begin{exercise}
+    Find the maximal dimension of a subspace $W\subset \Mat{n\times n}(\R)$ such that for any $A,B\in W$, $\tr(AB)=0$.
+\end{exercise}
+
+A natural candidate of $W$ is the space of all strictly upper triangular matrices. This clearly satisfies the condition. Moreover, this space is maximal, in the sense that no other matrix may be included into $W$. To see this, expand
+\begin{equation}\label{eq.trAB}
+    \tr(AB) = \sum_{i,j} a_{ij}b_{ji}.
+\end{equation}
+If $C\notin W$ and $C$ has zero diagonal, then there is some $i,j$ such that $i<j$ and $\tr(CE_{ij})\neq 0$. Otherwise suppose that $C$ has some non-zero diagonal entries. We take the 'strictly upper triangular' part $A\in W$ of $C$, so that $C-A$ is lower triangular. It follows that $\tr((C-A)^2)>0$, again a contradiction.
+
+However, showing that this $W$ has the maximal dimension requires some theory.
+
+\section{Quadratic forms}\label{sec.quadform}
+
+Throughout this note, let $k$ be a field and assume $\ch(k)\neq 2$. All vector spaces are assumed finite dimensional.
+
+\begin{definition}
+    A \emph{quadratic form} on a vector space $V$ is a map $Q:V\to k$ satisfying
+    \begin{enumerate}
+        \item $Q(\lambda x)=\lambda^2 Q(x)$ for all $\lambda\in k$, $x\in V$.
+        \item $(x,y)\mapsto Q(x+y)-Q(x)-Q(y)$ is a bilinear form on $V$.
+    \end{enumerate}
+    The pair $(V,Q)$ is called a \emph{quadratic space}.
+\end{definition}
+
+Since $\ch(k)\neq 2$, we have a bijective correspondence between quadratic forms and symmetric bilinear forms, given by
+\begin{equation*}
+    x\cdot y=\frac{1}{2}\left(Q(x+y)-Q(x)-Q(y)\right),
+\end{equation*}
+\begin{equation*}
+    Q(x)=x\cdot x.
+\end{equation*}
+
+Given a basis $\{e_i\}_{i=1}^n$ of $V$, the quadratic form is associated to a matrix $A=(a_{ij})$ given by $a_{ij}=e_i\cdot e_j$. Let $\mathbf{x}=\sum_{i=1}^n x_ie_i$. We have
+\begin{equation*}
+    Q(\mathbf{x}) = \sum_{i,j=1}^n a_{ij}x_ix_j = \mathbf{x}^\top A \mathbf{x}.
+\end{equation*}
+
+If we transform the basis with a matrix $S^{-1}$, the new quadratic form is given by $A'=S^\top A S$. It follows that the determinant of $A$ is invariant up to a square. This is called the \emph{discriminant} of the quadratic form, denoted as $\Delta(V)\in k/k^{\times 2}$.
+    
+The morphisms of quadratic spaces are the \emph{metric morphisms} that are $k$-linear and preserve this bilinear form. 
+
+The quadratic space is said non-degenerate if the bilinear form is non-degenerate, i.e. the evident map $\theta:V\to V^\vee$ is an isomorphism.
+
+We also have the notion of orthogonality from the bilinear form. Given a subspace $U\subset V$, we can define its orthogonal complement $U^\bot$. If $V$ is non-degenerate, this fits into the exact sequence
+\begin{equation}\label{eq.ortho}
+    0\longrightarrow U^\bot \longrightarrow V \longrightarrow U^\vee \longrightarrow 0.
+\end{equation}
+In particular, the \emph{radical} of $V$ is defined as $\rad(V)=V^\bot$.
+We now have three notions of non-degeneracy:
+\begin{itemize}[nosep, label=$\circ$]
+    \item $\Delta(V)\neq 0$;
+    \item $\theta$ is an isomorphism;
+    \item $\rad(V)=0$.
+\end{itemize}
+Under our assumptions, these all coincide.
+
+Now we prove Witt's theorem. Let $(V,Q)$ and $(V',Q')$ be isomorphic quadratic spaces. Let $U\subset V'$ be a subspace and let
+\begin{equation*}
+    s: U\hookrightarrow V'
+\end{equation*}
+be an injective metric morphism. We wish to extend $s$.
+
+\begin{lemma}\label{lem.degen}
+    If $U$ is degenerate, then there exists a $U_1\subset V$ which contains $U$ as a proper subspace and an injective metric morphism $s_1:U_1\hookrightarrow V$ extending $s$.
+\end{lemma}
+
+\begin{proof}
+    Pick a nonzero $x\in \rad(U)$ and a linear functional $f\in U^\vee$ such that $f(x)=1$. Then there exists $y\in V$ such that $u\cdot y=f(u)$ for all $u\in U$. Moreover, we assume that $y\cdot y=0$ by replacing $y$ with $y-\frac{1}{2}Q(y)x$. Put $U_1=U\oplus ky$.
+
+    With the same construction as above, we can find an element $y'\in V'\setminus s(U)$ corresponding to the functional $fs^{-1}$, and by adding a multiple of $s(x)\in\rad(s(U))$, we may assume that $y'\cdot y'=0$. Then $y\mapsto y'$ gives the desired metric morphism $U_1\hookrightarrow s(U)\oplus V'$.
+\end{proof}
+
+\begin{theorem}[Witt]
+    Let $V\simeq V'$ be isomorphic \emph{non-degenerate} quadratic spaces. Then any such injective metric morphism $s:U\hookrightarrow V'$ can be extended to an isomorphism of $V$ and $V'$.
+\end{theorem}
+
+\begin{proof}
+    For simplicity, we assume that $V=V'$. And by lemma \ref{lem.degen}, we may assume that $U$ is non-degenerate. We proceed by induction on $\dim(U)$. 
+
+    If $\dim(U)=1$, let $x\in U$ and put $y:=s(x)$ so that $x\cdot x=y\cdot y\neq 0$. It follows that $x+y$ is orthogonal to $x-y$. Then there must exist a $\epsilon\in\{\pm 1\}$ such that $z:=x+\epsilon y$ satisfies $z^2\neq 0$. Otherwise, 
+    \[ 0=Q(x+y)+Q(x-y)=Q(2x), \]
+    a contradiction. Let $\sigma$ be the reflection along $z$. This is a metric morphism as it fixes the orthogonal complement of $kz$. In particular, we have 
+    \[ 2\sigma(x)=\sigma(x+\epsilon y)+\sigma(x-\epsilon y)=-x-\epsilon y+x-\epsilon y=-2\epsilon y. \]
+    Clearly, $-\epsilon\sigma$ is the desired automorphism.
+
+    Now suppose $\dim(U)>1$. Pick a nontrivial orthogonal decomposition $U=U_1\oplus U_2$. By the induction hypothesis, $\left.s\right\vert_{U_1}$ can be extended to some automorphism of $V$. With (the inverse of) this map we may assume that $s$ is the identity on $U_1$. Then $s(U_2)\subset U_1^\bot$. By the induction hypothesis, $\left.s\right\vert_{U_2}$ can be extended to an automorphism of $U_1^\bot$, which can be further extended to $V$ setting it to be identiy on $U_1$. 
+\end{proof}
+
+This elegant proof is from \emph{A Course in Arithmetic} by Serre.
+
+Now, the problem can be easily solved. In view of (\ref{eq.trAB}), we have a quadratic form $Q$ on a real vector space $V$, and we are looking for the largest subspace $W$ such that $\left.Q\right\vert_W=0$. This is called an \emph{isotropic} subspace.
+
+We've found a candidate $W_0$ that is at least a local maximum. Suppose that there is a $W$ with larger dimension. Any embedding $W_0\hookrightarrow W$ would be a metric morphism. By Witt's theorem, we can pull $W$ back to an isotropic subspace that contains $W_0$ as a proper subspace. Contradiction.
+
+\section{Some more theory}
+
+\begin{proposition}\label{prop.diag}
+    Any quadratic space $(V,Q)$ has an orthogonal basis.
+\end{proposition}
+
+\begin{proof}
+    We use induction on $\dim(V)$. If $V$ is isotropic, any basis is orthogonal. Otherwise suppose $Q(v)\neq 0$. It is clear that the orthogonal complement of $kv$ is a hyperplane in $V$, so the induction hypothesis applies and the proof is complete.
+\end{proof}
+
+\begin{lemma}\label{lem.nondegissummand}
+    Let $(V,Q)$ be a quadratic space. If $U$ is a non-degenerate subspace of $V$, then $V=U\oplus U^{\bot}$.
+\end{lemma}
+
+\begin{proof}
+    Clearly $U\cap U^{\bot}=0$. To see that they span $V$, we take an orthogonal basis $\{e_i\}_{i=1}^n$ of $U$. We have $e_i\cdot e_i\neq 0$ for all $i$. Given $x\in V$, it's clear that
+    \begin{equation*}
+        x-\sum_{i=1}^n \frac{e_i\cdot x}{e_i\cdot e_i}e_i \quad\in x+U
+    \end{equation*}
+    is orthogonal to $U$. This completes the proof.
+\end{proof}
+
+\begin{proposition}\label{prop.extend}
+    Let $U$ be a subspace of a quadratic space $V$ such that $V=U+U^\bot$. (By the above lemma, this condition is always satisfied if $U$ is non-degenerate.) Then any orthogonal basis $B$ of $U$ can be extended to an orthogonal basis of $V$.
+\end{proposition}
+
+\begin{proof}
+    We use induction on $\dim(V)$. The base case $\dim(V)=0$ is trivial. Consider
+    \begin{itemize}
+        \item If $U^\bot=V$, let $W$ be a direct sum complement of $U$ and pick an orthogonal basis $C$ of $W$. Then $B\cup C$ is an orthogonal basis of $V$.
+        \item Otherwise, pick any basis $A$ of the isotropic subspace $\rad(U)=U\cap U^\bot$ and extend it to an orthogonal basis $C$ of $U^\bot$ with the induction hypothesis. Then $B\cup (C\setminus A)$ is an orthogonal basis of $V$.
+    \end{itemize}
+    This completes the proof.
+\end{proof}
+
+Let $\{e_i\}_{i=1}^n$ be an orthogonal basis. Then there exists $\lambda_1,\lambda_2,\cdots,\lambda_n$ in $k$ such that
+\begin{equation*}
+    \mathbf{x}=\sum_{i=1}^n x_ie_i \Longrightarrow Q(\mathbf{x})=\sum_{i=1}^n \lambda_i x_i^2.
+\end{equation*}
+The matrix of $Q$ is thus diagonal, and we see that $\Delta(V)=\lambda_1\lambda_2\cdots\lambda_n$. In the rest of this section, \emph{we assume that the spaces are non-degenerate}, so $\lambda_i\neq 0$. Hence we may view the $\lambda_i$ as lying in $k^\times/k^{\times 2}$.
+
+Conversely, for $\lambda\in k^{\times}/k^{\times 2}$, introduce the notation $\langle\lambda\rangle$ for the one-dimensional quadratic space. Denote the orthogonal direct sum of two quadratic spaces $(V,Q)$ and $(V',Q')$ as $V+V'$.
+\begin{corollary}
+    Let $(V,Q)$ be a non-degenerate quadratic space over $k$. Then
+    \begin{enumerate}
+        \item $V\simeq \langle\lambda_1\rangle+\langle\lambda_2\rangle+\cdots+\langle\lambda_n\rangle$, where $\lambda_i\in k^\times/k^{\times 2}$.
+        \item If $\lambda\in Q(V)\setminus \{0\}$, then there exists a non-degenerate quadratic space $H$ such that $V\simeq \langle\lambda\rangle+H$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    1 is proposition \ref{prop.diag}. 2 follows from extending $\{v\}$ with proposition \ref{prop.extend}, where $v$ is a (non-isotropic) vector satisfying $Q(v)=\lambda$. 
+\end{proof}
+    
+Let $M(k)$ be the set of isomorphism classes of non-degenerate quadratic spaces over $k$. Then $M(k)$ clearly forms a commutative monoid under $+$, with identity being the zero space. Moreover, $M(k)$ has the left and right cancellation property by Witt's theorem.
+
+In fact, we also have a natural mulplication on $M(k)$, hence making it a commutative \emph{semiring}. This is the tensor product. Let's quickly summarize these operations.
+
+\begin{definition}
+    Let $(V,Q)$ and $(V',Q')$ be elements of $M(k)$. Let $v\in V$, $v'\in V'$. We have
+    \begin{itemize}
+        \item Their orthogonal sum is $(V\oplus V',Q_{+})$, where $Q_{+}(v+v'):=Q(v)+Q'(v')$.
+        \item Their tensor product is $(V\otimes_k V',Q_{\otimes})$, where $(v\otimes v')\cdot(w\otimes w'):=(v\cdot w)(v'\cdot w')$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    The \emph{Grothendieck--Witt ring} $\GW(k)$ is obtained by using the Grothendieck construction on the semiring $M(k)$.
+\end{definition}
+
+The elements of $\GW(k)$ can be (non-uniquely) represented as
+\[ n_1\langle\lambda_1\rangle+n_2\langle\lambda_2\rangle+\cdots+n_m\langle\lambda_m\rangle, \]
+where $n_i\in\Z\setminus\{0\}$ and $\lambda_i\in k^\times/k^{\times 2}$ are distinct. We also have the dimension map $\dim: \GW(k)\longrightarrow\mathbb{Z}$ (via the universal property of Grothendieck group).
+
+\begin{definition}
+    The \emph{hyperbolic plane} is the quadratic space $\HH=\langle 1\rangle+\langle -1\rangle$.
+\end{definition}
+
+\begin{definition}
+    A nonzero vector $v\in V$ is \emph{isotropic} if $Q(v)=0$. A quadratic space $V$ is \emph{isotropic} if $\left.Q\right\vert_V=0$, and is \emph{anisotropic} if $0\notin Q(V\setminus\{0\})$. 
+    In particular, the zero space is anisotropic.
+\end{definition}
+
+\begin{lemma}\label{lem.hypplane}
+    Equivalent definitions of hyperbolic planes. TFAE:
+    \begin{enumerate}
+        \item $V$ is a hyperbolic plane.
+        \item $V\simeq \langle\lambda\rangle + \langle-\lambda\rangle$ for some $\lambda\in k^\times/k^{\times 2}$.
+        \item $V$ is spanned by isotropic vectors $x,y$ such that $x\cdot y\neq 0$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{proposition}\label{prop.hypplanewitt}
+    Hyperbolic planes as subspaces. Let $V$ be a non-degenerate quadratic space.
+    \begin{enumerate}
+        \item If $x\in V$ is an isotropic vector, then there is a subspace $U\subset V$ containing $x$ such that $U\simeq \HH$.
+        \item More generally, if $W\subset V$ is an isotropic subspace of dimension $d$, then there exists a $2d$-dimensional subspace $U$ containing $W$ such that $U\simeq d\HH$.
+        \item $V$ can be decomposed as $V\simeq V_{h}+V_{a}$, where $V_{a}$ is anisotropic and $V_{h}\simeq d\HH$ for some $d\in\N$. This decomposition is unique up to isomorphisms of $V_{h}$ and $V_{a}$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Let $y$ be a vector such that $x\cdot y\neq 0$. Then $z=y-\dfrac{y\cdot y}{2x\cdot y}x$ is isotropic and $x\cdot z\neq 0$. By lemma \ref{lem.hypplane}, this proves 1.
+
+    For 2, we use induction on $d$. Let $w\in W$ be a nonzero vector and pick a subspace $L$ such that $W=kw\oplus L$. By (\ref{eq.ortho}), we have $\dim(L^\bot)=\dim(W^\bot)+1$, so we may pick $v\in L^\bot$ such that $v\cdot w\neq 0$. With the exact same argument as above, we see that $H:=\operatorname{span}(w,v)$ is a hyperbolic plane. By lemma \ref{lem.nondegissummand}, we have $V=H\oplus H^\bot$. Now we may pass to the pair $L\subset H^\bot$ for induction.
+
+    Now we prove 3. The existence of such factorization is easy. We take a maximal isotropic subspace, say of degree $d$, and extend it to a sum of $d$ hyperbolic spaces with clause 2. This is clearly a non-degenerate subspace. By lemma \ref{lem.nondegissummand}, it remains to see that its orthogonal complement is anisotropic. Indeed, if it contains an isotropic vector, it must contain a hyperbolic plane by clause 1. This contradicts the maximality of the isotropic subspace.
+
+    In the end of section \ref{sec.quadform}, we've shown the uniqueness of $V_{h}$. The uniqueness of its complement, $V_{a}$, immediately follows by virtue of Witt's theorem.
+\end{proof}
+
+The idea is that an isotropic subspaces carries no information beyond their dimension. To remove them, in view of proposition \ref{lem.nondegissummand}, we should find some minimal non-degenerate subspace containing the isotropic subspace, which turns out to be simply a sum of hyperbolic planes. This also leads to our definition of Witt rings.
+
+\begin{definition}
+    The \emph{Witt ring} $W(k)$ of a field $k$ is $\GW(k)$ modulo the ideal $(\HH)$ generated by the hyperbolic plane $\HH$.
+\end{definition}
+
+In fact, it is easy to see that $(\HH)=\Z\HH$, i.e. its elements are multiples of $\HH$ or its formal additive inverse. Since the tensor product is given by $\langle\lambda\rangle\oplus\langle\lambda'\rangle=\langle\lambda\lambda'\rangle$, tensoring with a hyperbolic plane always results in an orthogonal sum of hyperbolic planes by lemma \ref{lem.hypplane}. 
+
+By the above proposition, the elements of the Witt ring is in one-to-one correspondence with the isomorphism classes of anisotropic quadratic spaces.
+
+\begin{example}
+    $k$ is quadratically closed iff $\dim:\GW(k)\longrightarrow\Z$ is a ring isomorphism. In this case, $\HH=2\langle 1\rangle$, and thus $W(k)=\Z/2\Z$.
+\end{example}
+
+\section{The Reals}
+
+In this section, let $k=\R$. We first find the rings $\GW(k)$ and $W(k)$.
+
+We have $k/k^2=\{\pm 1\}$, so after diagonalizing, any non-degenerate quadratic space $V$ over $k$ has the form $n_+\langle1\rangle+n_-\langle-1\rangle$ where $n_+,n_-\in\N$. We'll show that these are in fact unique invariants by our next proposition.
+
+\begin{definition}
+    The \emph{signature} of $V$ is defined as $n_+-n_-$. This induces a ring homomorphism $\sgn:\GW(k)\longrightarrow\Z$.
+\end{definition}
+
+\begin{proposition}
+    The map $\sgn$ induces a ring isomorphism $W(k)\simeq\Z$. We also have that $\GW(k)\simeq\Z[G]$, the integral group ring of the group $G=\{\pm 1\}$.
+\end{proposition}
+
+\begin{proof}
+    The first part is trivial. For the second part, it suffices to show that $\{\langle1\rangle,\langle-1\rangle\}$ is a basis of (the group) $\GW(k)$. We've shown that they are spanning. To see their linear independence, suppose that $n_+\langle1\rangle+n_-\langle-1\rangle=0$ in $\GW(k)$. Passing to $W(k)$, we have $s\langle 1\rangle=0$ where $s:=n_+-n_-$. Now we use the proporty of $\R$ to note that $\vert s\vert\langle1\rangle$ is anisotropic, hence $s=0$ by the one-to-one correspondence. Therefore $n_+=n_-$ and by checking the dimension we have $n_+=n_-=0$.
+\end{proof}
+
+\begin{corollary}[Sylvester's Law of Inertia]
+    Two non-degenerate quadratic spaces over $\R$ are isomorphic iff they have the same dimension and the same signature.
+\end{corollary}
+
+\begin{proof}
+    Specifying such a space is equivalent to specifying the pair $(n_+,n_-)$, which is equivalent to giving the pair $(n_++n_-,n_+-n_-)$.
+\end{proof}
+
+In summary, a real quadratic space $V$ have a unique factorization as $\rad(V)+n_+\langle1\rangle+n_-\langle-1\rangle$. Let's return to the problem at the beginning as an example of finding these invariants.
+
+All we need is (\ref{eq.trAB}). Observe that $\rad(V)=0$, i.e. $V$ is non-degenerate. One checks that the following is an orthogonal basis of $V$:
+\begin{equation*}
+    \left\{E_{ii}: i\right\} \cup
+    \left\{E_{ij}+E_{ji}: i<j\right\} \cup
+    \left\{E_{ij}-E_{ji}: i<j\right\}.
+\end{equation*}
+The invariants may then be read off as $n_+=n+(n^2-n)/2$ and $n_-=(n^2-n)/2$. It follows that the dimension of the maximal isotropic subspace is $\min(n_+,n_-)=(n^2-n)/2$. Apparantly, such maximal subspace is far from unique.
+
+\begin{remark}
+    The result from this section holds if we replace $\R$ with any ordered field where every positive element is a square. Such fields are called \emph{Euclidean}. Real closed fields are, by definition, Euclidean.
+\end{remark}
+
+Checkpoint: The original problem has been solved and understood. We see that the theory of quadratic forms over $\C$ and $\R$ is very mild. In the following sections we'll provide a similar classification of quadratic forms over finite fields and $\Q_p$ as a mere introduction to the topic.
+
+\section{Finite fields}\label{sec.finitefld}
+
+Let $k=\F_q$ be a finite field of characteristic $p\neq 2$.
+
+\begin{theorem}[Chevalley-Warning]
+    Let $\{f_i\}_{i=1}^m$ be polynomials in $k[X_1,\ldots,X_n]$ and denote the set of their common zeros as $V$. If $\sum\deg(f_i)<n$, then $p$ divides $\vert V\vert$.
+\end{theorem}
+
+\begin{proof}
+    Put $P=\prod_{i=1}^m\left(1-f_i^{q-1}\right)$.
+    We notice that $P$ is the characteristic function of $V$.
+    It follows that $\vert V\vert\equiv\sum_{x\in k^n}P(x)\pmod{p}$.
+
+    To see that the right hand side is $0$, we note that $\deg(P)<n(q-1)$, so for each monomial in $P$, there exists at least one $X_j$ such that its exponent is less than $q-1$. The result follows from the elementary fact that
+    \begin{equation*}
+        0\leq l<q-1 \Longrightarrow \sum_{a\in k}a^l=0,
+    \end{equation*}
+    a direct consequence of the cyclic nature of the multiplicative group $k^\times$.
+\end{proof}
+
+\begin{corollary}\label{cor.finfld3d}
+    Any quadratic form of at least $3$ variables over a finite field has a nontrivial zero.
+\end{corollary}
+
+\begin{theorem}
+    Let's write $k^{\times 2}/k^\times=\{1,u\}$ since it has order $2$.
+    Then there exists exactly two (up to isomorphism) non-degenerate quadratic spaces of each dimension $n$:
+    \begin{itemize}
+        \item $n\langle 1\rangle$, with discriminant $\Delta=1$;
+        \item $(n-1)\langle 1\rangle+\langle u\rangle$, with discriminant $\Delta=u$.
+    \end{itemize}
+    Hence the discriminant is a complete invariant of such spaces.
+\end{theorem}
+
+\begin{proof}
+    Induct on $n$. The base case $n=1$ is trivial. By proposition \ref{prop.extend}, it suffices to show that any non-degenerate quadratic space of dimension $\geq 2$ contains a vector $x$ such that $Q(x)=1$. Indeed we prove a stronger statement: every $2$-dimensional non-degenerate quadratic space $V$ is \emph{universal}, meaning that $Q(V)=k$.
+    \begin{itemize}
+        \item If $V$ contains an isotropic vector, then it is a hyperbolic plane by proposition \ref{prop.hypplanewitt}. The hyperbolic plane is universal.
+        \item Otherwise, $V$ is anisotropic. Apply corollary \ref{cor.finfld3d} to $V+\langle-\lambda\rangle$ for any $\lambda\in k^\times$, and we see that $\lambda\in Q(V)$.
+    \end{itemize}
+    The proof is complete.
+\end{proof}
+
+From the above proof, we extract the following definition and an equivalent formulation.
+
+\begin{definition}
+    We say that a quadratic space $V$ represents a scalar $\lambda\in k$ if $\lambda\in Q(V\setminus\{0\})$.
+\end{definition}
+
+\begin{lemma}
+    If $V$ is non-degenerate, it represents $\lambda\in k^\times$ if and only if $V+\langle-\lambda\rangle$ represents $0$ (i.e. it contains an isotropic vector).
+\end{lemma}
+
+\section{Quaternion algebras}
+
+Fix a field $k$ of characteristic $p\neq 2$.
+
+\begin{definition}\label{def.quatalg}
+    Given two nonzero scalars $a,b\in k^\times$, the \emph{quaternion algebra} $\qa{a,b}{k}$ is the $k$-algebra generated by two elements $x_1,x_2$, subject to the relations
+    \begin{gather*}
+        x_1^2 = a\cdot 1, \\
+        x_2^2 = b\cdot 1, \\
+        x_1x_2 = -x_2x_1.
+    \end{gather*}
+    The uniqueness of this definition is a part of the following proposition.
+\end{definition}
+
+\begin{proposition}\label{prop.quatalgwelldef}
+    Up to algebra isomorphism, the quaternion algebra $\mathcal{A}:=\qa{a,b}{k}$ is unique, and has $\{1,x_1,x_2,x_1x_2\}$ as a basis. Moreover, $\mathcal{A}$ is a central simple $k$-algebra, hence represents an element in the Brauer group $\Br(k)$.
+\end{proposition}
+
+\begin{proof}
+    Put $x_3=x_1x_2$ and $B=\{1,x_1,x_2,x_3\}$. Clearly, $B$ spans $\mathcal{A}$ as a vector space and multiplication between its elements is specified by the relations. To prove uniqueness, it remains to show that $B$ is linearly independent. In fact, we contend that an element $y=\alpha_0+\alpha_1x_1+\alpha_2x_2+\alpha_3x_3$ lies in the center of $\mathcal{A}$ if and only if $\alpha_1=\alpha_2=\alpha_3=0$. This follows from the observation that for $i,j\in\{1,2,3\}$,
+    \begin{equation}\label{eq.quataltcomm}
+        i\neq j\Longrightarrow x_ix_j=-x_jx_i.
+    \end{equation}
+    Hence for $i\in\{1,2,3\}$, $[x_i,y]$ is a linear combination of $x_j$ and $x_k$, where $\{i,j,k\}=\{1,2,3\}$. If $y\in Z(\mathcal{A})\setminus k$, this implies that some $x_j$ and $x_k$ are collinear, contradicting (\ref{eq.quataltcomm}).
+
+    Finally, we need that $\mathcal{A}$ is simple. This is quite simple. Given $y$ as above and supposing that $\alpha_i\neq 0$ for some $i$, pick $j\neq i$. By taking the commutator of $y$ with $x_j$ and then $x_i$, we are guaranteed to obtain an invertible element of $\mathcal{A}$. In other words, the two-sided ideal generated by $y$ is $\mathcal{A}$, which means that $\mathcal{A}$ is simple.
+\end{proof}
+
+\begin{remark}
+    The quaternion algebra is a special case of the \emph{Clifford algebra} of a quadratic space $V$ which can be explicitly constructed as follows. Define the two-sided ideal $I:=\langle x\otimes x-Q(x)\cdot 1:x\in V\rangle$ of the tensor algebra $T(V)$, and the Clifford algebra is the quotient $\operatorname{Cl}(V):=T(V)/I$. If $V=\langle a\rangle+\langle b\rangle$, this of course coincides with $\qa{a,b}{k}$. With some modification, the Clifford algebra gives rise to an invariant of quadratic spaces also taking value in the Brauer group.
+\end{remark}
+
+\begin{lemma}\label{lem.quatalgwedd}
+    A quaternion algebra $\qa{a,b}{k}$ is either a division ring or isomorphic to $\Mat{2\times 2}(k)$.
+\end{lemma}
+
+\begin{proof}
+    This is Wedderburn's theorem (Theorem 3.4 \href{https://caelestia.github.io/2025/0603.pdf}{here}), applied to a simple algebra which is finite-dimensional over a field.
+\end{proof}
+
+\begin{example}
+    The prototypical quaternions $\HH=\qa{-1,-1}{\R}$ is a division ring.
+\end{example}
+
+\begin{definition}
+    Define the conjugation map $\overline{\,\cdot\,}$ as
+    \begin{equation*}
+        \overline{\alpha_0+\alpha_1x_1+\alpha_2x_2+\alpha_3x_3}=\alpha_0-\alpha_1x_1-\alpha_2x_2-\alpha_3x_3.
+    \end{equation*}
+    The \emph{(reduced) norm form} on the quaternion algebra is then defined as $Q(x)=x\overline{x}\in k$.
+\end{definition}
+
+We have $Q(\alpha_0+\alpha_1x_1+\alpha_2x_2+\alpha_3x_3)=\alpha_0^2-\alpha_1^2a-\alpha_2^2b+\alpha_3^2ab$. Note that the reduced norm is related to the usual algebra norm by
+\begin{equation}
+    Q(x)^2=\operatorname{N}_{\mathcal{A}\vert k}(x).
+\end{equation}
+We can check this by direct computation, or more conveniently, by reducing to the split case $\Mat{2\times 2}(k)$. Put $K=k(\sqrt{a})$. By the criterion given in $\ref{prop.splitcriterion}$, we have $\mathcal{A}\otimes K\simeq \qa{a,b}{K}\simeq \Mat{2\times 2}(K)$. This extension of scalar preserves conjugation and the norm form. Also define the reduced trace as $T(x)=x+\overline{x}$. For all $x\in\qa{a,b}{k}\subset\qa{a,b}{K}$, we have
+\begin{equation*}
+    x^2-T(x)x+Q(x)=0.
+\end{equation*}
+View $x$ as a $2\times 2$ matrix over $K$. Assuming that $x\notin k$, this implies $Q(x)=\det(x)$; if $x\in k$,  the same result holds. The rest is easy. As a left module over itself, $\mathcal{A}\otimes K\simeq K^2\oplus K^2$. We have
+\begin{equation*}
+    \operatorname{N}_{\mathcal{A}\vert k}(x)=\operatorname{N}_{\mathcal{A}\otimes K\vert K}(x)=\det(x)^2=Q(x)^2.
+\end{equation*} 
+
+\begin{lemma}
+    We equip the quaternion algebra $\qa{a,b}{k}$ with the norm form $Q$ and view it as a non-degenerate quadratic space. Then we have
+    \begin{align}\label{eq.quatnorm}
+        \qa{a,b}{k} &\simeq \langle 1\rangle+\langle -a\rangle+\langle -b\rangle+\langle ab\rangle \\
+        &= \left(1-\langle a\rangle\right)\left(1-\langle b\rangle\right),
+        \ \text{if viewed in }W(k). \notag
+    \end{align}
+\end{lemma}
+
+\begin{proof}
+    Proven in above discussion.
+\end{proof}
+
+\begin{lemma}\label{lem.quatalgisom}
+    Two quaternion algebras are isomorphic if and only if they are isomorphic as quadratic spaces when equipped with the norm form.
+\end{lemma}
+
+\begin{proof}
+    Let $\mathcal{A}=\qa{a,b}{k}$ and $\mathcal{A}'=\qa{a',b'}{k}$ be two quaternion algebras. Suppose we have an isomorphism $\varphi:\mathcal{A}\to\mathcal{A}'$ of $k$-algebras. $\varphi$ sends scalars (elements of $k$) to scalars. Less trivially, it also preserves the \emph{pure quaternions}, i.e., elements of $\operatorname{span}\{x_1,x_2,x_3\}$. Indeed, an element $y$ is either a scalar or a pure quaternion iff $y^2\in k$. Therefore, if $y=y_0+y_{\text{pure}}$, we have
+    \begin{equation*}
+        \varphi(\overline{y})=\varphi(y_0-y_{\text{pure}})=\varphi(y_0)-\varphi(y_{\text{pure}})=\overline{\varphi(y)},
+    \end{equation*}
+    so $\varphi$ commutes with conjugation, and hence with the norm form. This proves the 'only if' direction.
+
+    Conversely, suppose that $\mathcal{A}\simeq\mathcal{A}'$ as quadratic spaces. By Witt's theorem and the formula in (\ref{eq.quatnorm}), there is a copy of $\langle -a\rangle+\langle -b\rangle$ contained in $\mathcal{A}'_{\text{pure}}$ the subspace of pure quaternions in $\mathcal{A}'$. Since $y\in\mathcal{A}'_{\text{pure}}\Longrightarrow Q'(y)=y\overline{y}=-y^2$, this subspace encodes the precise relations in definition \ref{def.quatalg}. By uniqueness (proposition \ref{prop.quatalgwelldef}), $\mathcal{A}$ embeds into $\mathcal{A}'$ as algebras, and the result follows.
+\end{proof}
+
+As a result, the quaternion algebra $\qa{a,b}{k}$ may equivalently be defined for $a,b\in k^\times/k^{\times 2}$, as a square factor does not affect the quadratic space in (\ref{eq.quatnorm}).
+
+\begin{lemma}
+    Let $\mathcal{A}=\qa{a,b}{k}$. Then the conjugation map $\overline{\,\cdot\,}$ is an algebra isomorphism $\mathcal{A}^\op\to\mathcal{A}$. In particular, the norm form $Q$ satisfies $Q(xy)=Q(x)Q(y)$ for all $x,y\in\mathcal{A}$.
+\end{lemma}
+
+\begin{proof}
+    The conjugation map is a bijective $k$-linear map, so it suffices to check that $\overline{xy}=\overline{y}\,\overline{x}$ for the basis elements $1,x_1,x_2,x_3$. We've already proved this in (\ref{eq.quataltcomm}). Now, we have
+    \begin{equation*}
+        Q(xy)=xy\overline{xy}=x(y\overline{y})\overline{x}=Q(x)Q(y),
+    \end{equation*}
+    which proves the second part.
+\end{proof}
+
+\begin{proposition}\label{prop.splitcriterion}
+    Let $\mathcal{A}=\qa{a,b}{k}$. TFAE:
+    \begin{enumerate}
+        \item $\mathcal{A}$ \emph{splits} over $k$, i.e., it represents the identity element in the Brauer group $\Br(k)$;
+        \item $\mathcal{A}$ is isomorphic to $\Mat{2\times 2}(k)$;
+        \item $\mathcal{A}$ contains an isotropic vector;
+        \item $\mathcal{A}$ contains an isotropic pure quaternion;
+        \item the quadratic space $\langle a\rangle+\langle b\rangle$ represents $1$, i.e., $1=as^2+bt^2$ for $s,t\in k$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    The equivalence 1 $\Longleftrightarrow$ 2 is lemma \ref{lem.quatalgwedd}. 4 $\Longrightarrow$ 3 is trivial. 
+    
+    2 $\Longleftrightarrow$ 3: I claim that an element $x\in\mathcal{A}$ is invertible iff it's not isotropic. If $x$ is isotropic, then $Q(x)=x\overline{x}=0$, so $x$ is not invertible. Conversely, suppose that $Q(x)=x\overline{x}\in k^\times$. Note that $x$ is algebraic over $k$, so this implies that $x$ is invertible. Since $x$ commutes with $\overline{x}$, it is clear that $Q(x)^{-1}\overline{x}$ is the inverse of $x$.
+    
+    2, 3 $\Longrightarrow$ 4: By lemma \ref{lem.quatalgisom}, it suffices to prove 4 for one pair of $a,b$. Let's pick $a=1$, $b=-1$. (\ref{eq.quatnorm}) states that
+    \begin{equation*}
+        \qa{1,-1}{k}\simeq \langle 1\rangle+\left(\langle -1\rangle+\langle 1\rangle+\langle -1\rangle\right).
+    \end{equation*}
+    The second summand corresponds to the pure quaternions, and clearly contains an isotropic vector.
+
+    4 $\Longleftrightarrow$ 5: By (\ref{eq.quatnorm}), we have
+    \begin{align*}
+        \mathcal{A}_{\text{pure}} &\simeq \langle -a\rangle+\langle -b\rangle+\langle ab\rangle \\
+        &\simeq \langle b\rangle+\langle a\rangle+\langle -1\rangle,
+        \quad \left(\text{multiply by} -ab\in k^\times\right).
+    \end{align*}
+    Since $\langle a\rangle+\langle b\rangle$ is non-degenerate, it is either a hyperbolic plane or anisotropic. The result follows.
+\end{proof}
+
+\begin{corollary}
+    For all $a\in k^\times$, we have
+    \begin{equation*}
+        \qa{1,a}{k} \simeq \qa{a,-a}{k}\simeq \qa{a,1-a}{k}\simeq \Mat{2\times 2}(k).
+    \end{equation*}
+\end{corollary}
+
+\begin{proof}
+    Use criterion 3 and 5.
+\end{proof}
+
+\begin{example}
+    In section \ref{sec.finitefld}, we proved that every $2$-dimensional quadratic space over a finite field is universal. Hence by criterion 5, every quaternion algebra over a finite field splits.
+\end{example}
+
+\begin{proposition}
+    For $a,b,c\in k^\times/k^{\times 2}$, we have
+    \begin{equation*}
+        \qa{a,b}{k}\otimes\qa{a,c}{k}\simeq \qa{a,bc}{k}\otimes\Mat{2\times 2}(k).
+    \end{equation*}
+    Computing in $\Br(k)$, this is
+    \begin{equation*}
+        \qa{a,b}{k}\qa{a,c}{k}=\qa{a,bc}{k}.
+    \end{equation*}
+\end{proposition}
+
+\begin{proof}
+    Let $\{1,x_1,x_2,x_3\}$ and $\{1,x_1',x_2',x_3'\}$ be the bases of $\qa{a,b}{k}$ and $\qa{a,c}{k}$, respectively.
+    Put
+    \begin{gather*}
+        \xi_1=x_1\otimes 1, \quad \xi_2=x_2\otimes x_2' \\
+        \Longrightarrow \xi_1^2=a, \quad \xi_2^2=bc, \quad \xi_1\xi_2=-\xi_2\xi_1.
+    \end{gather*}
+    and
+    \begin{gather*}
+        \zeta_1=1\otimes x_2', \quad \zeta_2=x_1\otimes x_3' \\
+        \Longrightarrow \zeta_1^2=c, \quad \zeta_2^2=-a^2c, \quad \zeta_1\zeta_2=-\zeta_2\zeta_1.
+    \end{gather*}
+    Denote the subalgebras generated by $\{\xi_1,\xi_2\}$ and $\{\zeta_1,\zeta_2\}$ as $\mathcal{A}\simeq\qa{a,bc}{k}$ and $\mathcal{B}\simeq\qa{c,-a^2c}{k}$, respectively. We have $\mathcal{B}\simeq\Mat{2\times 2}(k)$ by the previous corollary.
+
+    It remains to show that $\mathcal{A}\otimes\mathcal{B}$ is isomorphic to $\qa{a,b}{k} \otimes \qa{a,c}{k}$. From inspecting the basic elements, we know that the elements of $\mathcal{A}$ commutes with those of $\mathcal{B}$. So we have an algebra homomorphism $\mathcal{A}\otimes\mathcal{B} \to \qa{a,b}{k} \otimes \qa{a,c}{k}$ given by multiplication. It is injective because $\mathcal{A}\otimes\mathcal{B}$ is central simple. As both sides have the same dimension, it must be an isomorphism.
+\end{proof}
+
+In particular, it follows that any quaternion algebra $\qa{a,b}{k}$ lies in $2$-torsion of the Brauer group $\Br(k)$.
+In fact, we have a deep result providing a partial converse to this.
+
+\begin{theorem}[Merkurje]
+    The quaternion algebras generate the $2$-torsion of the Brauer group $\Br(k)$.
+\end{theorem}
+
+\section{Hasse invariant}
+
+\begin{definition}
+    Let $V$ be a non-degenerate quadratic space diagonalized as $V\simeq \langle\lambda_1\rangle+\langle\lambda_2\rangle+\cdots+\langle\lambda_n\rangle$. The \emph{Hasse invariant} of $V$ is defined as the $k$-algebra
+    \begin{equation*}
+        S(V):=\bigotimes_{i<j}\qa{\lambda_i,\lambda_j}{k}.
+    \end{equation*}
+\end{definition}
+
+\section*{The End}
+
+
+
+\noindent Compiled on \todayymd.
+
+\noindent\home
+
+\end{document}
