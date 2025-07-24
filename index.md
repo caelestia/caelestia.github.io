@@ -82,4 +82,6 @@ Creation of this page.
 [Covering spaces over the wrong space](https://caelestia.github.io/2025/0715.pdf)
 
 [The series expansion of log(2) and Abel's Theorem](https://caelestia.github.io/2025/0717.pdf)
+
+[Solving the homogeneous linear ODE in calculus, justified?](https://caelestia.github.io/2025/0721.pdf)
 <!-- append -->

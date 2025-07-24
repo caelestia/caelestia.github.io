@@ -1,0 +1,160 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{commands}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+
+\begin{document}
+\puttitle{Solving the homogeneous linear ODE in calculus, justified?}\self
+
+Fix the field $k=\R$ or $\C$. We will be working with (vectors of) anayltic functions over $k$ which we denote by $\mathcal{O}(-)$.
+
+\section{Homogeneous linear ODE}
+
+\begin{theorem}[Cauchy]
+    Let $0<R\leq\infty$ and $D:=\bc{z\in k:\abs{z}<R}$. Suppose $A\in\Mat{n\times n}(\mathcal{O}(D))$ is a matrix of analytic functions on $D$. Then given any $u_0\in k^n$, there is a unique vector-valued analytic function $u\in\mathcal{O}(D)^n$ such that $u(0)=u_0$ and $u'(z)=A(z)u(z)$ for all $z\in D$.
+\end{theorem}
+
+\begin{proof}[Proof of Uniqueness]
+    It is well known that any function in $\mathcal{O}(D)$ has a unique Taylor expansion centered at $0$ that converges everywhere on $D$. Let's write
+    \[
+        A(z)=\sum_{r=0}^\infty A_r z^r,\quad A_r=\bp{a_{ij,r}}_{ij}\in\Mat{n\times n}(k),
+    \]
+    and
+    \[
+        u(z)=\sum_{r=0}^\infty u_r z^r,\quad u_r=\bp{u_{i,r}}_i\in k^n.
+    \]
+    Note that this agrees with the given $u_0$. The equation $u'(z)=A(z)u(z)$ becomes
+    \[
+        \sum_{r=0}^\infty r u_r z^{r-1}
+        =\sum_{t=0}^\infty A_t\sum_{s=0}^\infty u_s z^{t+s}
+        =\sum_{r=0}^\infty \bp{\sum_{s=0}^r A_{r-s} u_{s}} z^r.
+    \]
+    By comparing the coefficients of both sides, we deduce that
+    \begin{equation}\label{eq:u}
+        (r+1) u_{r+1}=\sum_{s=0}^r A_{r-s} u_s,\quad\forall r\geq 0.
+    \end{equation}
+    This is a full recurrence relation for the $u_r$'s.
+\end{proof}
+
+\begin{proof}[Proof of Existence]
+    Let $u_r$ be given by the recurrence relation \eqref{eq:u} with the initial value $u_0$. We need to show that the series for $u(z)$ converges within $D$.
+    
+    For any $0<\rho<R$, the series
+    \[
+        \sum_{r=0}^\infty \abs{a_{ij,r}} \rho^r
+    \]
+    converges for all $i,j$. Hence there exists a natural number $N$ such that
+    \[
+        \abs{a_{ij,r}} \rho^r\leq N\rho^{-1},\quad\forall i,j,r.
+    \]
+    Define the following matrix
+    \[
+        B(z)=\sum_{r=0}^\infty B_r z^r,\quad B_r=\bp{b_{ij,r}}_{ij},
+    \]
+    where
+    \begin{equation}\label{eq:bgeqa}
+        b_{ij,r}:=\frac{N}{\rho^{r+1}}\geq\abs{a_{ij,r}},\quad\forall i,j,r.
+    \end{equation}
+    We then look for a solution of the form $v(z)=(f(z),\cdots,f(z))$ to the equation $v'(z)=B(z)v(z)$ within a smaller disk $D'=\bc{z:\abs{z}<\rho}$. As every entry of $B(z)$ is equal to 
+    \[
+        b(z):=\frac{N}{\rho}\bp{1-\frac{z}{\rho}}^{-1}\in\mathcal{O}(D'),
+    \]
+    this is not difficult to solve:
+    \[
+        f'(z)=n b(z) f(z)
+    \]
+    \[    
+        \Longrightarrow f(z)=C\exp\bc{n\int_0^z b(t)dt}=C\bp{1-\frac{z}{\rho}}^{-nN} \in\mathcal{O}(D').
+    \]
+    Here $C=f(0)$ is an initial value yet to be determined. Thus, applying \eqref{eq:u} to this equation, we can write
+    \begin{equation*}
+        v(z)=\sum_{r=0}^\infty v_r z^r,\quad (r+1) v_{r+1}=\sum_{s=0}^r B_{r-s} v_s,\quad\forall r\geq 0.
+    \end{equation*}
+
+    This completes the setup for Cauchy's majorization method. Once we set 
+    \[
+        C=v_{1,0}=\cdots=v_{n,0}\overset{!}{=}\max\{\abs{u_{1,0}},\abs{u_{2,0}},\cdots,\abs{u_{n,0}}\}>0,
+    \]
+    we can show that every component of $v_r$ is positive using induction. Then, by doing another induction on $r$ with \eqref{eq:bgeqa}, we obtain
+    \[
+        \abs{u_{i,r}}\leq v_{i,r},\quad\forall i,r.
+    \]
+
+    Since $v(z)\in\mathcal{O}(D')^n$ converges, the series $u(z)=\sum_{r=0}^\infty u_rz^r$ converges on $D'$ as well. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    The analytic solutions $y\in\mathcal{O}(D)$ to the following ODE
+    \[
+        y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y=0,\quad a_i\in\mathcal{O}(D),\quad\forall i,
+    \]
+    form a $k$-vector space of dimension $n$.
+\end{corollary}
+
+\begin{proof}
+    This equation is turned into the previous matrix equation by putting
+    \[
+        u = \bp{y,y',\cdots,y^{(n-1)}}^\top.
+    \]
+    The matrix $A$ is defined accordingly. The theorem gives an isomorphism between $\bc{u:u'=Au}$ and $k^n$.
+\end{proof}
+
+\section{A generalization}
+
+The theorem has a natural generalization to Riemann surfaces. Let $M$ be a simply connected Riemann surface, $p\in M$.
+
+Suppose $A\in\Mat{n\times n}(\Omega^{1,0}(M))$ is a matrix of holomorphic 1-forms on $M$. We solve for a vector-valued holomorphic function $u\in\mathcal{O}(M)^n$ satisfying $u(p)=u_0$ and
+\begin{equation}\label{eq:du}
+    du=Au.
+\end{equation}
+
+For any open subset $U\subset M$, denote by $\mathcal{F}(U)\subset\mathcal{O}(U)$ the set of solutions to \eqref{eq:du} on $U$. Then $\mathcal{F}$ is a sheaf of $\C$-vector spaces on $M$. 
+
+\begin{corollary}
+    For each $u_0\in k^n$, there exists a unique $u$ satisfying the above conditions.
+\end{corollary}
+
+\begin{proof}
+    First, let's confirm that the equation locally reduces to the theorem. Around any point $m\in M$, we may take a holomorphic chart $z:U\xrightarrow{\sim} D$ where $D$ is a disk in the complex plane centered at $z(m)$. Then matrix $A$ can then be written as $A=\tilde{A}dz$ for some $\tilde{A}\in\Mat{n\times n}(\mathcal{O}(U))$. Identifying $U$ with $D$, the equation becomes 
+    \[
+        du=\tilde{A}u dz \Longleftrightarrow u'=\tilde{A}u.
+    \]
+    Hence the theorem applies, implying that $\ev_m:\mathcal{F}(U)\longrightarrow\C^n$ is an isomorphism of $\C$-vector spaces.
+
+    As a result, any two local solutions agreeing at a point $m$ must coincide in a neighborhood of $m$. By basic complex analysis, they must coincide on the entire connected component containing $m$, wherever they are both defined. It follows that for any $m\in V$ with $V$ open and connected, the evaluation map $\ev_m:\mathcal{F}(V)\longrightarrow\C^n$ is injective.
+
+    Moreover, consider open and connected subsets $\varnothing\neq V\subset U$, such that $\mathcal{F}(U)\simeq\C^n$. Then the injectivity implies that the restriction map $\mathcal{F}(U)\longrightarrow\mathcal{F}(V)$ is a bijection. Since such $U$'s cover $M$, we conclude that $\mathcal{F}$ is a locally constant sheaf.
+
+    Therefore the \etale space of $\mathcal{F}$ is a covering space of $M$. Since $M$ is simply connected, the covering space must be trivial. In other words, $\mathcal{F}$ is a constant sheaf. It follows that $\mathcal{F}(M)\simeq\C^n$.
+\end{proof}
+
+\begin{remark}
+    In the above proof, only the last step used simply connectedness of $M$. More generally, we have the following. The proof is both extremely routine and awfully long, so of course it won't be included here.
+\end{remark}
+
+\begin{theorem}
+    Let $X$ be a connected, locally path connected and semi-locally simply connected space, $x\in X$. Then 
+    \begin{enumerate}[label=(\roman*)]
+        \item The category of locally constant sheaves of sets on $X$ is equivalent to the category of left $\pi_1(X,x)$-sets.
+        \item Let $R$ be a commutative ring. The category of locally constant sheaves of $R$-modules on $X$ is equivalent to the category of left $R[\pi_1(X,x)]$-modules.
+        \item The above equivalences are given by the stalk functor $\mathcal{F}\mapsto\mathcal{F}_x$ and a reconstruction functor, obtained by constructing \etale spaces as the quotients of the universal cover by the stabilizer of each orbit of the $\pi_1(X,x)$-action, and then taking the disjoint union of them.
+    \end{enumerate}
+\end{theorem}
+
+\section*{The End}
+
+Fun fact: I don't know what happens if we consider smooth functions instead.
+
+\hfill
+
+\noindent Compiled on \todayymd.
+
+\noindent\home
+
+\end{document}
