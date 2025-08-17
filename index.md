@@ -84,4 +84,6 @@ Creation of this page.
 [The series expansion of log(2) and Abel's Theorem](https://caelestia.github.io/2025/0717.pdf)
 
 [Solving the homogeneous linear ODE in calculus, justified?](https://caelestia.github.io/2025/0721.pdf)
+
+[Riemann correspondence](https://caelestia.github.io/2025/0729.html)
 <!-- append -->
