@@ -1,0 +1,280 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{commands}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+\newcommand{\m}{\sqrt{-3}}
+\newcommand{\leg}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
+\newcommand{\csd}[1]{\subsection{\texorpdfstring{$d=-#1$}{d=-#1}}\indent}
+
+\begin{document}
+\puttitle{x²+3y²=p}\self
+
+Today we do a basic exercise in algebraic number theory while also take note of some results and the chains of logic involved.
+
+Let $p$ be a prime number. We wish to find integral solutions to the equation
+\begin{equation}\label{eq:origin}
+    x^2+3y^2=p.
+\end{equation}
+
+This is the same as
+\begin{equation*}
+    \Nm\bp{x+\m y}=\bp{x+\m y}\bp{x-\m y}=p.
+\end{equation*}
+By considering the norm ($\Nm(p)=p^2$), we see that such a solution exists if and only if $p$ is reducible in $\Z[\m]$.
+
+Let $K=\Q(\m)$. Its ring of integers is known by the following result:
+\begin{proposition}\label{prop:ok}
+    Let $K=\Q(\sqrt{m})$ for a square-free $m\neq 1$, then the ring of integers and the discriminant are given by
+    \begin{itemize}
+        \item If $m\equiv 2,3\pmod{4}$, then $O_K=\Z[\sqrt{m}]$ and $\disc(O_K\vert\Z)=4m$.
+        \item If $m\equiv 1\pmod{4}$, then $O_K=\Z[\frac{1+\sqrt{m}}{2}]$ and $\disc(O_K\vert\Z)=m$.
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    In either case, we have
+    \[
+        D(1,\sqrt{m})=(O_K:\Z[\sqrt{m}])^2\disc(O_K\vert \Z),
+    \]
+    which can be easily computed as
+    \[
+        D(1,\sqrt{m})=
+        \begin{vmatrix}
+            \Tr(1) & \Tr(\sqrt{m}) \\
+            \Tr(\sqrt{m}) & \Tr(m) \\
+        \end{vmatrix}
+        =4m.
+    \]
+    So we have $(O_K:\Z[\sqrt{m}])\in\bc{1,2}$. To conclude the proof, we note that
+    \begin{itemize}
+        \item Stickelberger's theorem states that $\disc(O_K\vert \Z)\equiv 0,1\pmod{4}$, so if $m\equiv 2,3\pmod{4}$, we must have $(O_K:\Z[\sqrt{m}])=2$.
+        \item On the other hand, if $m\equiv 1\pmod{4}$, the polynomial $X^2-X+\frac{1-m}{4}$ has integral coefficients and has $\frac{1+\sqrt{m}}{2}\notin\Z[\sqrt{m}]$ as a root.
+    \end{itemize}
+    This completes the proof.
+\end{proof}
+
+Since $m=-3$, we have the second scenario, and $O_K=\Z[\omega]$ where $\omega^3=1$.
+
+\begin{theorem}
+    Let $A$ be a Dedekind domain with field of fractions $K$. If the integral closure $B$ of $A$ in a finite separable extension $L\vert K$ satisfies $B=A[\alpha]$, then the factorization of any prime ideal $\mathfrak{p}$ of $A$ can be determined as follows. Factorize the mininal polynomial $f$ of $\alpha$ into distinct irreducibles $g_{i}\in A[X]$ modulo $\mathfrak{p}$, i.e.
+    \[
+        f \equiv \prod_{i}g_{i}^{e_{i}} \pmod{\mathfrak{p}}, \quad e_{i}>0.
+    \]
+    Then we have
+    \[
+        \mathfrak{p}B = \prod_{i} \bp{\mathfrak{p},g_{i}(\alpha)}^{e_{i}}
+    \]
+    is the factorization of $\mathfrak{p}B$ into distinct prime ideals.
+\end{theorem}
+
+\begin{proof}
+    $B/\mathfrak{p}B \simeq B\otimes A/\mathfrak{p} \simeq A[X]/(f)\otimes A/\mathfrak{p} \simeq (A/\mathfrak{p})[X]/(\bar{f})$. The ideal $\mathfrak{p}B$ is uniquely determined by this quotient because (a) its prime factors are precisely the prime ideals in the quotient, and (b) the ramification index $e$ of each factor $\mathfrak{P}$ is the largest number such that $\mathfrak{P}^e\neq 0$.  
+\end{proof}
+
+If we don't have $B=A[\alpha]$, we can still apply this result for some $\mathfrak{p}$ and $\alpha$. Write 
+\[\disc(1,\alpha,\cdots,\alpha^{n-1})=\mathfrak{a}\cdot\disc(B\vert A).\]
+If $\mathfrak{p}\nmid\mathfrak{a}$, then we can invert any element in $\mathfrak{a}\setminus\mathfrak{p}$, or what is the same, localize at $\mathfrak{p}$. Then $B_{\mathfrak{p}}=A_{\mathfrak{p}}[\alpha]$, and the same result holds.
+
+\section{The solution}
+
+Back to the problem. We have $A=\Z$, $\mathfrak{p}=(p)$, $B=\Z[\omega]$. If $p=2$, we can't apply the previous result, but obviously \eqref{eq:origin} has no solution. From now on let $p\neq 2$.
+
+From the above discussion, $(p)$ splits/ramifies in $B$ if and only if $f(X)=X^2+3$ is reducible modulo $p$. We have the following chain of implications.
+\begin{align}
+    & \text{\eqref{eq:origin} has a solution} \nonumber \\
+    \Longrightarrow\ & (p) \text{ splits/ramifies in }B \nonumber \\
+    \Longleftrightarrow\ & X^2+3 \text{ is reducible in }(\Z/(p))[X] \nonumber \\
+    \Longleftrightarrow\ & -3 \text{ is a square modulo } p \nonumber \\
+    \Longleftrightarrow\ & p \text{ is a square modulo } 3 \tag{$\heartsuit$} \label{eq:-3/p} \\
+    \Longleftrightarrow\ & p \equiv 0,1 \pmod{3} \nonumber
+\end{align}
+where, in the line \eqref{eq:-3/p}, we used the well-known quadratic reciprocity:
+\[
+    \leg{-3}{p}=\leg{-1}{p}\leg{3}{p}=(-1)^{\frac{p-1}{2}}\leg{p}{3}(-1)^{\frac{p-1}{2}\cdot 1}=\leg{p}{3}.
+\]
+
+It remains to prove the converse of the first $\Longrightarrow$. First, note that
+\begin{lemma}
+    $\Z[\omega]$ is a PID.
+\end{lemma}
+\begin{proof}
+    It is well known that the number field $\Q[\m]$ has class number $1$. See section \ref{sec:appendix}.
+\end{proof}
+
+Hence, if $(p)$ splits/ramifies in $B$, it must be the principal ideal generated by the product of two irreducibles in $B$, and hence must take the form
+\[
+    (u+v\omega)(u+v\overline{\omega}) = p,
+\]
+where $u,v\in\Z$. Side note: $\text{LHS}=u^2-uv+v^2$.
+
+Finally, we must check that up to a unit $\Z[\omega]^\times=\ba{-1,\omega}$, $u+v\omega\overset{!}{\sim}x+y\m$. Indeed,
+\begin{itemize}
+    \item If $v$ is even, there is nothing to prove;
+    \item If $u$ is even and $v$ is odd, $\omega^2(u+v\omega)=v+u\overline{\omega}\in\Z[\m]$;
+    \item If $u,v$ are both odd, then $\omega(u+v\omega)=\frac{\bp{(u+v)+(u-v)\m}}{2}\in\Z[\m]$.
+\end{itemize}
+This completes the proof.\qed
+
+\section{Fermat}
+
+According to Milne, this result we just proved
+\begin{center}
+    \eqref{eq:origin} has a solution $\Longleftrightarrow$ $p\equiv 0,1\pmod{3}$
+\end{center}
+was (probably) proven by Fermat himself. It is unlikely that he took the above approach---and he didn't really need to. We shall now sketch a proof using his method of infinite descent.
+
+Only the $\Longleftarrow$ direction deserves a proof. Also assume that $p>3$. First, we solve \eqref{eq:origin} modulo $p$. This amounts to solving
+\[
+    \bp{\frac{x}{y}}^2 \equiv -3 \pmod{p}.
+\]
+Even without QR, it is possible to observe that such solution must exist if $p\equiv 1\pmod{3}$. As hinted by the above manipulations, we have
+\begin{align*}
+    & (u/v)^3 \equiv 1, \quad u\not\equiv v \pmod{p} \\
+    \Longrightarrow\ & u^2 - uv + v^2 \equiv 0 \pmod{p} \\
+    \Longrightarrow\ & (2u-v)^2 \equiv -3v^2 \pmod{p}.
+\end{align*}
+
+Now, let $x,y\in\Z$, $k\in\Z_{>0}$ be such that 
+\[
+    x^2 + 3y^2 = kp
+\]
+and $k$ is minimal among all such triples $(x,y,k)$. Let $u,v$ be integers with smallest absolute value which satisfy
+\[
+    u \equiv x, \quad v \equiv y \pmod{k}.
+\]
+Let $u^2+3v^2=k'k$. Clearly, assuming that $k>1$, we have $k'>0$.
+
+Note an equivalent formulation of multiplicity of the norm
+\[
+    (x^2+3y^2)(u^2+3v^2)=(xu+3yv)^2+3(xv-yu)^2.
+\]
+Since both $xu+3yv$ and $xv-yu$ are divisible by $k$, we have
+\[
+    k'p = \bp{\frac{xu+3yv}{k}}^2+3\bp{\frac{xv-yu}{k}}^2.
+\]
+However,
+\[
+    k'k = u^2+3v^2 \leq 4\bp{\frac{k}{2}}^2 = k^2.
+\]
+Thus we have $k'\leq k$, and so $k'=k$ by the minimality of $k$. This is only possible if both $\abs{u}=\abs{v}=k/2\in\Z$ and $k=p$, which is absurd.
+
+Hence, it must be that $k=1$. \qed
+
+\section{Appendix: quadratic number fields of class number 1}\label{sec:appendix}
+
+Suppose that $-d=1, 2, 3, 7, 11, 19, 43, 67, 163$. It is well-known that $K:=\Q[\sqrt{d}]$ has class number $h=1$, i.e. $O_{K}$ is a PID. Let's see why this is true.
+
+Of course, we have to start examining each case by finding the ring of integers using Proposition \ref{prop:ok}. We will also need the following result for reducing the number of primes to check into a very managable, finite number.
+
+\begin{definition}
+    Let $K$ be an degree $n$ extension of $\Q$, and let $2s$ be the number of nonreal complex embeddings $K\hookrightarrow\C$. Then the \emph{Minkowski bound} is given by
+    \[
+        B_K = \frac{n!}{n^n}\bp{\frac{4}{\pi}}^s.
+    \]
+\end{definition}
+
+\begin{theorem}
+    Under the same assumptions as above, there exists a representative $\mathfrak{a}$ for each element of the class group $\operatorname{Cl}(K)$, satisfying
+    \[
+        \N(\mathfrak{a})=\abs{\mathcal{N}(\mathfrak{a})}\leq B_K\abs{\Delta}^{\frac{1}{2}},
+    \]
+    where $\Delta_K$ is the discriminant of $O_K\vert\Z$. 
+\end{theorem}
+
+\begin{proof}[Proof.(sketch)]
+    $\mathfrak{a}$ embeds into $\R^{n-2s}\oplus\C^{s}\simeq\R^{n}$ as a full lattice. Denote its fundamental parallelopiped as $D$. We should be able to see that
+    \[
+        \mu(D) = 2^{-s} \cdot \N\mathfrak{a} \cdot \abs{\Delta_K}^{\frac{1}{2}}.
+    \]
+    Then, by Minkowski's theorem, there exists an $\alpha\in\mathfrak{a}$ whose image in $\R^{n}$ has coordinates controlled by this number. The result then follows from this.
+\end{proof}
+
+In our case, we always have a imaginary quadratic field, so $B_K=\frac{1}{2}\cdot\frac{4}{\pi}\leq 0.637$.
+
+\csd{1}
+
+$O_K=\Z[\sqrt{-1}]$.
+This is a Euclidean domain.
+
+\csd{2}
+
+$O_K=\Z[\sqrt{-2}]$ and $\Delta_K=-8$. We only need to consider primes (in $\Z$) that are $\leq B_K\abs{\Delta_K}^{1/2}\leq 1.81$. There are none, so we have nothing to check.
+
+\csd{3}
+
+$O_K=\Z[\frac{1+\sqrt{-3}}{2}]$ and $\Delta_K=-3$. As $B_K\abs{\Delta_K}^{1/2}\leq 1.11$, we have nothing to check.
+
+\csd{7}
+
+$O_K=\Z[\frac{1+\sqrt{-7}}{2}]$ and $\Delta_K=-7$. As $B_K\abs{\Delta_K}^{1/2}\leq 1.69$, we have nothing to check.
+
+\csd{11}
+
+$O_K=\Z[\frac{1+\sqrt{-11}}{2}]$ and $\Delta_K=-11$. We have $B_K\abs{\Delta_K}^{1/2}\leq 2.12$.
+
+\begin{itemize}
+    \item $p=2$. The factorization of $p$ in $O_K$ is equivalent to the factorization of $X^2-X+3\equiv X^2+X+1\pmod{2}$, which is clearly irreducible. That is, the prime $2$ is inert in $O_K$.
+\end{itemize}
+
+\csd{19}
+
+$O_K=\Z[\frac{1+\sqrt{-19}}{2}]$ and $\Delta_K=-19$. We have $B_K\abs{\Delta_K}^{1/2}\leq 2.78$.
+
+\begin{itemize}
+    \item $p=2$. $X^2-X+5\equiv X^2+X+1\pmod{2}$ is irreducible, so the prime $2$ is inert.
+\end{itemize}
+
+\csd{43}
+
+$O_K=\Z[\frac{1+\sqrt{-43}}{2}]$ and $\Delta_K=-43$. We have $B_K\abs{\Delta_K}^{1/2}\leq 4.18$.
+
+\begin{itemize}
+    \item $p=2$. $X^2-X+11\equiv X^2+X+1\pmod{2}$ is irreducible, so the prime $2$ is inert.
+    \item $p=3$. $X^2-X+11\equiv X^2-X-1\pmod{3}$ is irreducible, so the prime $3$ is inert.
+\end{itemize}
+
+\csd{67}
+
+$O_K=\Z[\frac{1+\sqrt{-67}}{2}]$ and $\Delta_K=-67$. We have $B_K\abs{\Delta_K}^{1/2}\leq 5.22$.
+
+\begin{itemize}
+    \item $p=2$. $X^2-X+17\equiv X^2+X+1\pmod{2}$ is irreducible, so the prime $2$ is inert.
+    \item $p=3$. $X^2-X+17\equiv X^2-X-1\pmod{3}$ is irreducible, so the prime $3$ is inert.
+    \item $p=5$. $X^2-X+17\equiv X^2-X-3\pmod{5}$ is irreducible, so the prime $5$ is inert.
+\end{itemize}
+
+\csd{163}
+
+$O_K=\Z[\frac{1+\sqrt{-163}}{2}]$ and $\Delta_K=-163$. We have $B_K\abs{\Delta_K}^{1/2}\leq 8.14$.
+
+\begin{itemize}
+    \item $p=2$. $X^2-X+41\equiv X^2+X+1\pmod{2}$ is irreducible, so the prime $2$ is inert.
+    \item $p=3$. $X^2-X+41\equiv X^2-X-1\pmod{3}$ is irreducible, so the prime $3$ is inert.
+    \item $p=5$. $X^2-X+41\equiv X^2-X+1\pmod{5}$ is irreducible, so the prime $5$ is inert.
+    \item $p=7$. $X^2-X+41\equiv X^2-X-1\pmod{7}$ is irreducible, so the prime $7$ is inert.
+\end{itemize}
+
+\begin{remark}
+    To prove irreducibility of $X^2-X+\frac{1-d}{4}$ modulo an \emph{odd} prime $p$, instead of checking every element of $\F_{p}$, it is easier to show that $\Delta_K$ is not a square modulo $p$, i.e., that
+    \[
+        \leg{\Delta_K}{p}=-1.
+    \]
+\end{remark}
+
+Final remark: In 1952, Heegner proved that this list exhausts all imaginary quadratic number fields with class number $1$.
+
+\section*{The End}
+
+
+
+\noindent Compiled on \todayymd.
+
+\noindent\home
+
+\end{document}
