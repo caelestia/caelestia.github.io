@@ -1,0 +1,2 @@
+# Always choose our local version for PDFs if a merge conflict occurs.
+*.pdf merge=ours
