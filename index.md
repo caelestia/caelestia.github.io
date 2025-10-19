@@ -90,4 +90,10 @@ Creation of this page.
 ## 2025/Sep
 
 [Basic example & existence of non-measureable sets](https://caelestia.github.io/2025/0910.pdf)
+
+[x²+3y²=p](https://caelestia.github.io/2025/0911.pdf)
+
+## 2025/Oct
+
+[]()
 <!-- append -->

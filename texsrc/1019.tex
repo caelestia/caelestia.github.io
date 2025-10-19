@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{commands}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+
+\begin{document}
+\puttitle{Nakayama's Lemma}\self
+
+This note tries to cover some basic commutative algebra. So \emph{all rings are commutative}.
+
+Indeed, Nakayama's lemma is used to reduce finite modules to linear algebra. Let's start with the linear algebra.
+
+\begin{theorem}[Hamilton-Cayley]
+    Let $R$ be a ring and let $A\in\Mat{n}(R)$. Then $\chi_A(A)=0$.
+\end{theorem}
+
+\begin{proof}
+    There are of course a ton of ways to prove this. The most standard proof is
+    \[
+        \chi_A(t):=\det(t-A) \ \Longrightarrow\ \chi_A(A)=\det(0)=0.
+    \]
+    In more details, let $Y=R[t]$ be a formal polynomial ring, and $V:=R^{\oplus n}$ has a $Y$-module structure given by $t\leadsto A$. Consider the base change $V_Y=Y^{\oplus n}$ of $V$ and $t-A\in\End(V_Y)$. 
+\end{proof}
+
+\section{Nakayama}
+
+\section*{The End}
+
+
+
+\noindent Compiled on \todayymd.
+
+\noindent\home
+
+\end{document}
