@@ -6,6 +6,7 @@
 \usepackage{commands}
 \usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage{tikz-cd}
 \hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
 
 
@@ -25,10 +26,30 @@ Indeed, Nakayama's lemma is used to reduce finite modules to linear algebra. Let
     \[
         \chi_A(t):=\det(t-A) \ \Longrightarrow\ \chi_A(A)=\det(0)=0.
     \]
-    In more details, let $Y=R[t]$ be a formal polynomial ring, and $V:=R^{\oplus n}$ has a $Y$-module structure given by $t\leadsto A$. Consider the base change $V_Y=Y^{\oplus n}$ of $V$ and $t-A\in\End(V_Y)$. 
+    In more details, let $Y=R[t]$ be a formal polynomial ring, and $V:=R^{\oplus n}$ has a $Y$-module structure given by $t\leadsto A$. Consider the base change $V_Y=Y^{\oplus n}$ of $V$ and $t-A\in\End(V_Y)$. Observe that the composition
+    \[ \begin{tikzcd}
+        V \ar[r, hookrightarrow] & V_Y \ar[r] & \coker{(t-A)}
+    \end{tikzcd} \]
+    is an isomorphism of $Y$-modules. Thus $\chi_A(t)=(t-A)^{\vee}(t-A)$ annihilates $V$.
 \end{proof}
 
+\begin{remark}
+    Alternatively, observe that this is a purely formal proposition and it suffices to give a proof over the field $\Q(X_{11},X_{12},\cdots,X_{nn})$. Since a matrix $A$ is non-diagonalizable if and only if the discriminant of the determinant of $t-A$ vanishes, the set these matrices is a Zariski closed set. Indeed, an infinite field, every nonempty Zariski open set is dense. Hence we may reduce to the case where $A$ is diagonal, which is trivial.
+\end{remark}
+
 \section{Nakayama}
+
+\begin{theorem}[Nakayama's lemma, 1st version]
+    Let $R$ be a ring and $I$ be an ideal. If $M$ is a finitely generated module satisfying $IM=M$, then there exists $\alpha\in 1+I$ which annihilates $M$.
+\end{theorem}
+
+\begin{proof}
+    Pick a set $\bc{e_i}_{i=1}^n$ of generators of $M$. The condition implies elements $a_{ij}\in I$ satisfying
+    \[
+        e_i = \sum_{j} a_{ij}e_j,\quad \forall i.
+    \]
+    
+\end{proof}
 
 \section*{The End}
 
