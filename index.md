@@ -95,5 +95,7 @@ Creation of this page.
 
 ## 2025/Oct
 
+[Nakayama's Lemma](https://caelestia.github.io/2025/1019.pdf)
+
 []()
 <!-- append -->

@@ -9,6 +9,7 @@
 \usepackage{tikz-cd}
 \hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
 
+\newcommand{\rad}{\operatorname{rad}}
 
 \begin{document}
 \puttitle{Nakayama's Lemma}\self
@@ -27,9 +28,9 @@ Indeed, Nakayama's lemma is used to reduce finite modules to linear algebra. Let
         \chi_A(t):=\det(t-A) \ \Longrightarrow\ \chi_A(A)=\det(0)=0.
     \]
     In more details, let $Y=R[t]$ be a formal polynomial ring, and $V:=R^{\oplus n}$ has a $Y$-module structure given by $t\leadsto A$. Consider the base change $V_Y=Y^{\oplus n}$ of $V$ and $t-A\in\End(V_Y)$. Observe that the composition
-    \[ \begin{tikzcd}
+    \[\begin{tikzcd}
         V \ar[r, hookrightarrow] & V_Y \ar[r] & \coker{(t-A)}
-    \end{tikzcd} \]
+    \end{tikzcd}\]
     is an isomorphism of $Y$-modules. Thus $\chi_A(t)=(t-A)^{\vee}(t-A)$ annihilates $V$.
 \end{proof}
 
@@ -39,17 +40,88 @@ Indeed, Nakayama's lemma is used to reduce finite modules to linear algebra. Let
 
 \section{Nakayama}
 
-\begin{theorem}[Nakayama's lemma, 1st version]
-    Let $R$ be a ring and $I$ be an ideal. If $M$ is a finitely generated module satisfying $IM=M$, then there exists $\alpha\in 1+I$ which annihilates $M$.
+\begin{theorem}[Nakayama's lemma, 1st version]\label{thm:naka}
+    Let $R$ be a ring and $I$ be an ideal. If $M$ is a finitely generated $R$-module, we have
+    \begin{enumerate}[itemsep=1pt, label=(\alph*)]
+        \item If $\varphi\in\End(M)$ and $\varphi(M)\subset IM$, then $\varphi$ satisfies a polynomial equation $X^n+\sum_{d=0}^{n-1}a_dX^d=0$, where $a_d\in I^{n-d}$.
+        \item If $IM=M$, then there exists $\alpha\in 1+I$ which annihilates $M$.
+    \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-    Pick a set $\bc{e_i}_{i=1}^n$ of generators of $M$. The condition implies elements $a_{ij}\in I$ satisfying
+    (b) follows from (a) by taking $\varphi=\id_M$. Pick a set $\bc{e_i}_{i=1}^n$ of generators of $M$. Using condition of (a) we have elements $a_{ij}\in I$ satisfying
     \[
-        e_i = \sum_{j} a_{ij}e_j,\quad \forall i.
+        \varphi(e_i) = \sum_{j} a_{ij}e_j,\quad \forall i.
     \]
-    
+    In other words, the matrix $A=\bp{a_{ij}}$ makes the following diagram commute:
+    \[\begin{tikzcd}
+        R^{\oplus n} \ar[rr, "A"] \ar[rd, two heads] & & M^{\oplus n} \ar[ld, two heads] \\
+        & M &
+    \end{tikzcd}\]
+    where the two surjections are both given by $(x_i)_i \mapsto \sum x_ie_i\in M$. The polynomial $\chi_A(t)$ has the required form, and by Hamilton-Cayley, $\chi_A(\varphi)=0\in\End_R(M)$.
 \end{proof}
+
+\begin{proposition}
+    Let $M$ be a finitely generated $R$-module. If $\varphi:M\to M$ is surjective, then it is an isomorphism.
+\end{proposition}
+
+\begin{proof}
+    $M$ has a finitely generated $R[t]$-module structure given by $t\leadsto\varphi$. In Theorem \ref{thm:naka} (b), take $I=(t)$. The condition $IM=M$ follows from surjectivity of $\varphi$. We conclude that $1+tf(t)$ annihilates $M$ for some $f(t)\in R[t]$, and the result follows.
+\end{proof}
+
+\begin{definition}
+    The Jacobson radical in a ring $R$ is the intersection of all maximal ideals, denoted by $\rad(R)$. 
+\end{definition}
+
+\begin{lemma}
+    If $I$ is an ideal of $R$, then $I\subset\rad(R)$ if and only if every element of $1+I$ is a unit.
+\end{lemma}
+
+\begin{proof}
+    If $\beta\in\rad(R)$, then $1+\beta$ does not lie in any maximal ideal, so it must be a unit. Conversely, if $I\not\subset\mathfrak{m}$ for some maximal ideal $\mathfrak{m}\subset R$, then the quotient map $R\to R/\mathfrak{m}$ is surjective on $I$. In particular, there exists $\beta\in I$ such that $1+\beta\in\mathfrak{m}$.
+\end{proof}
+
+\begin{corollary}
+    Let $M$ be a finitely generated $R$-module. If $I\subset\rad(R)$ and $IM=M$, then $M=0$.
+\end{corollary}
+
+\begin{proof}
+    By Theorem \ref{thm:naka} (b).
+\end{proof}
+
+Put $k:=R/I$ and denote the base change as $(-)_k:=(-)\otimes k$, even when $k$ if not a field.
+
+\begin{corollary}[Nakayama's lemma, 2nd version]
+    Let $M$, $N$ be $R$-modules, $I\subset\rad(R)$. Suppose that $M$ is finitely generated. We have
+    \begin{enumerate}[itemsep=1pt, label=(\alph*)]
+        \item If $M_k=0$, then $M=0$.
+        \item If $\varphi\in\hom_R(N,M)$ and $\varphi_k$ is surjective, then so is $\varphi$.
+        \item A subset $\bc{x_i}_{i=1}^n\subset M$ generates $M$ if and only if $\bc{\bar x_i}_i$ generates $M_k$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    If $M_k=M\otimes(R/I)=M/IM=0$, then $M=0$ by the last corollary. This proves (a). Now tensor the following SES with $k$,
+    \[\begin{tikzcd}
+        0 \ar[r] & N \ar[r] & M \ar[r] & \coker \ar[r] & 0
+    \end{tikzcd}\]
+    And we see that $\coker{}\!\otimes k=0$. Clause (b) then follows from (a). Finally, we show (c) by applying (b) to the map $R^{\oplus n}\longrightarrow M$.
+\end{proof}
+
+\section{An application}
+
+Let $(R,\mathfrak{m},k)$ be a Noetherian local ring, and $M$ be a finitely generated flat $R$-module. Then $M$ is in fact free.
+
+To see this, and consider the kernel
+\[\begin{tikzcd}
+    0 \ar[r] & \ker \ar[r] & R^{\oplus n} \ar[r] & M \ar[r] & 0 
+\end{tikzcd}\]
+On tensoring with $k$, since $\mathrm{Tor}_1^R(M,k)=0$, we obtain an exact sequence of $k$-vector spaces
+\[\begin{tikzcd}
+    0 \ar[r] & \ker\otimes k \ar[r] & k^{\oplus n} \ar[r] & M_k \ar[r] & 0 
+\end{tikzcd}\]
+
+
 
 \section*{The End}
 
