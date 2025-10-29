@@ -112,15 +112,15 @@ Put $k:=R/I$ and denote the base change as $(-)_k:=(-)\otimes k$, even when $k$ 
 
 Let $(R,\mathfrak{m},k)$ be a Noetherian local ring, and $M$ be a finitely generated flat $R$-module. Then $M$ is in fact free.
 
-To see this, and consider the kernel
+To see this, lift a basis of $M_k$ to a minimal set of generators of $M$ using (c), and consider the sequence
 \[\begin{tikzcd}
     0 \ar[r] & \ker \ar[r] & R^{\oplus n} \ar[r] & M \ar[r] & 0 
 \end{tikzcd}\]
 On tensoring with $k$, since $\mathrm{Tor}_1^R(M,k)=0$, we obtain an exact sequence of $k$-vector spaces
 \[\begin{tikzcd}
-    0 \ar[r] & \ker\otimes k \ar[r] & k^{\oplus n} \ar[r] & M_k \ar[r] & 0 
+    0 \ar[r] & \ker{}\!\otimes k \ar[r] & k^{\oplus n} \ar[r,"\sim"] & M_k \ar[r] & 0 
 \end{tikzcd}\]
-
+So $\ker{}\!\otimes k=0$. $\ker{}\!$ is finitely generated as a submodule of $R^{\oplus n}$, thus (a) implies that $\ker{}\!=0$, as desired.
 
 
 \section*{The End}
