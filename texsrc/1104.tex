@@ -1,0 +1,163 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{commands}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{tikz-cd, xcolor}
+\hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
+
+
+\begin{document}
+\puttitle{Normal basis theorem}\self
+
+The familiar normal basis theorem states that:
+
+\begin{theorem}
+    Let $L|K$ be a finite Galois extension with Galois group $G$. Then $L\simeq K[G]$ as left $G$-modules.
+\end{theorem}
+
+In other words, $L$ viewed as a representation is isomorphic to the regular representation of $G$. It then follows that
+\[
+    H^r(G,L) = H^r(G,K[G]) = H^r(G,\Ind^{G}_{\bc{1}}(K)) = 0,
+\]
+for all $r>0$, where the last equality is Shapiro's lemma.
+
+\section{Field theoretic proof}
+
+Let's only sketch this proof because it's somewhat long, although being quite elegant otherwise.
+
+\begin{lemma}[Linear independence of characters]\label{artin}
+    If $K$ is an integral domain and $G$ is a monoid, then the set of characters $\hom_{\mathsf{Mon}}(G,K^\times)$ is linear independent over $K$. 
+\end{lemma}
+
+Of course, we only need the case of $K$ a field and $G$ a group.
+
+\begin{proof}
+    Let $\chi_1,\cdots,\chi_n$ be characters. Consider the set
+    \[
+        \mathcal{S} := \bc{(c_1,\cdots,c_n)\in K^n\setminus 0: \: c_1\chi_1+\cdots+c_n\chi_n=0}
+    \]
+    Let $(a_1,\cdots,a_n)$ be an element of $\mathcal{S}$ such that $n:=\abs{\bc{i:a_i\neq 0}}$ is minimal. Because $\chi(1)=1$ for any character $\chi$, $n>1$. Thus we may assume WLOG that $a_1,a_2\neq 0$. Let $h\in G$ be a constant to be determined. Notice that
+    \[
+        -a_1\chi_1(gh) = \sum_{i>1} a_i\chi_i(gh) = \sum_{i>1} a_i\chi_i(g)\chi_i(h), 
+    \]
+    and also
+    \[
+        -a_1\chi_1(gh) = -a_1\chi_1(g)\chi_1(h) = \sum_{i>1} a_i\chi_i(g)\chi_1(h).
+    \]
+    Pick $h\in G$ such that $\chi_1(h)\neq\chi_2(h)$. On subtracting the two equations, we obtain a nonzero linear relation which clearly contradicts the minimality of $(a_i)$.
+\end{proof}
+
+We first prove the theorem for infinite $K$. This amounts to the following two facts.
+
+\begin{enumerate}[label=(\Roman*)]
+    \item Given that $K$ is infinite, for any $K$-algebra $A$ and $L|K$, the set $\hom_{\Alg{K}}(A,L)$ is algebraically independent over $L$. \label{I}
+    \item Let $\bc{x_\sigma\in L:\sigma\in G}$ be a set of elements indexed by $G$, then it is a basis if and only if $\det\bp{\tau(x_\sigma)}_{\sigma,\tau}\neq 0$. \label{II}
+\end{enumerate}
+
+Since there exists a basis indexed by $G$, the formal polynomial (modulo abuse of notation) $\det\bp{\tau(X_\sigma)}_{\sigma,\tau}\neq 0$. We may plug in $X_\sigma=\sigma(\cdot)$, and by \ref{I}, there must exist $x\in L$ such that $\det\bp{\tau\sigma(x)}_{\sigma,\tau}\neq 0$. We apply \ref{II} one more time to see that $\bc{\sigma(x)}$ is indeed a basis of $L$. 
+
+\ref{II} follows from Lemma \ref{artin}. 
+
+\ref{I} is more tricky to prove. We need to show that $P(\chi_1,\cdots,\chi_n)\neq 0$ for some nonzero polynomial $P\in L[X_1,\cdots,X_n]$. The set
+\[
+    \bc{(\chi_1(a),\cdots,\chi_n(a)):a\in A}
+\]
+generates the $L$-vector space $L^n$ by Lemma \ref{artin}, hence there must exist $a_1,\cdots,a_n$ such that the matrix $\bp{\chi_i(a_j)}_{i,j}$ is invertible. Consider the map
+\[\begin{tikzcd}[row sep=tiny]
+    K^n \ar[r] & A \\
+    (k_1,\cdots,k_n) \ar[r,mapsto] & \sum_ik_ia_i
+\end{tikzcd}\]
+composed with $P(\chi_1(\cdot),\cdots,\chi_n(\cdot))$. This is non-zero as a formal polynomial because $P\neq 0$, thus it must also be non-zero as a function. Here we used that $K$ is infinite. This concludes the proof of \ref{I}.
+
+Now, suppose that $L|K$ is a cyclic extension, $G=\ba{\sigma}$. This clearly includes every finite $K$. In this scenario, we view $L$ as a $K[X]$-module via $X\leadsto\sigma$, and the structure theorem factorizes $L$ as the sum of invariant subspaces
+\[
+    L \simeq \frac{K[X]}{(P_1)}\oplus\cdots\oplus\frac{K[X]}{(P_r)},\quad P_1|\cdots|P_r.
+\]
+Since $L|K$ is finite, $P_i\neq 0$. By Lemma \ref{artin}, we also can't have $0<\deg(P_i)<[L:K]$. Thus the only possibility is $L\simeq K[X]/(X^{[L:K]}-1)$. The basis $\bc{1,X,\cdots,X^{[L:K]-1}}$ pulls back along this isomorphism as a normal basis.
+
+For more details, see Thm 9.5.6 \href{https://wwli.asia/downloads/books/Al-jabr-1.pdf}{here}.
+
+\section{Module theoretic proof}
+
+The idea is to use the following result.
+
+\begin{proposition}\label{prop}
+    Let $G$ be a group, and let $L|K$ be a finite extension of fields. Then the base change functor $L\otimes-:\Mod{K[G]}\longrightarrow\Mod{L[G]}$ is conservative, i.e., if two $K[G]$-modules $V$, $W$ satisfy $L\otimes V\simeq L\otimes W$, then $V\simeq W$. Here by ``module'' we always mean modules that are finite-dimensional over $K$.
+\end{proposition}
+The assumption that $L|K$ is finite can be dropped in this result; see end of this note.
+
+\begin{proof}
+    Recall the Krull-Remak-Schmidt theorem: If $M$ is a $R$-module of finite length, then there exists a unique (up to isomorphism and reordering) decomposition of $M$ into indecomposable modules:
+    \[
+        M \simeq \bigoplus_{i=1}^n M_i.
+    \]
+    All modules have finite length under the assumption we noted.
+
+    If $L\otimes V\simeq L\otimes W$ as $L[G]$-modules, they must be isomorphic as $K[G]$-modules as well. The result then follows from
+    \[
+        L\otimes V \simeq V^{\oplus[L:K]},\quad \text{in }\Mod{K[G]},
+    \]
+    and comparing the indecomposable components of both sides.
+\end{proof}
+
+This easy fact from representation theory now allows us to give a proof without worrying about the finiteness of $K$. More specifically, we will establish the following isomorphisms of \emph{right} $K[G]$-modules\footnote{They are of course also (left) $L$-linear, but we don't need it, as we saw in the proof of Proposition \ref{prop}.}
+\[\begin{tikzcd}
+    L\otimes_K\textcolor{red}{L} \ar[r, "\sim"] & \displaystyle \prod_{\sigma\in G}L_{\color{red}\sigma} & \ar[l, "\sim"'] L\otimes \textcolor{red}{K[G]}
+\end{tikzcd}\]
+where the actions are given by $l\cdot\tau:=\tau^{-1}(l)$, $e_\sigma\cdot\tau:=e_{\sigma\tau}$ and the right multiplication of $K[G]$, respectively.
+
+\subsection{The first isomorphism}
+
+This is given by
+\[\begin{tikzcd}[row sep=0]
+    L\otimes_KL \ar[r, "\sim"] & \displaystyle\prod_{\sigma\in G}L_\sigma \\
+    l\otimes m \ar[r, mapsto] & \bp{l\sigma(m)}_\sigma
+\end{tikzcd}\]
+
+Evidently, this defines a homomorphism of right $G$-modules, so it suffices to prove this is a bijection. There are two ways to see this. The first idea is to use Lemma \ref{artin}. Let $b_1,\cdots,b_d$ be a $K$-basis of $L$, then any element of $L\otimes_K L$ can be put in the form
+\[
+    \sum_{i=1}^d l_i\otimes b_i \longmapsto \bp{\sum_{i=1}^dl_i\sigma(b_i)}_\sigma
+\]
+Thus the matrix of this homomorphism is $\bp{\sigma(b_i)}_{\sigma,i}$, which is invertible precisely by the linear independence of characters. Hence the map is an isomorphism.
+
+A completely different approach is given by the primitive element theorem. Let
+\[
+    L=K(\alpha)\simeq K[X]/(P),\quad \text{basis: }\bc{1,\alpha,\alpha^2,\cdots}.
+\]
+Then
+\[\begin{tikzcd}
+    L\otimes_KL \simeq L\otimes K[X]/(P) = L[X]/(P) \ar[r, "\sim", "\mathrm{CRT}"'] & \displaystyle\prod_{\sigma}L_{\sigma}.
+\end{tikzcd}\]
+Since $P(X)=\prod_{\sigma}(X-\sigma(\alpha))$, we confirm this defines the same map as above.
+
+\begin{remark}
+    I think it makes some sense to call this isomorphism ``the normal basis theorem'', which is itself just primitive element thm + CRT. Galois!  
+\end{remark}
+
+\begin{remark}
+    If we write the RHS as $\operatorname{Map}(G,L)$, then this isomorphism generalizes to infinite $L|K$, with an small extra smoothness condition.
+\end{remark}
+
+\subsection{The second isomorphism}
+
+This is given by
+\[\begin{tikzcd}[row sep=0]
+    L\otimes K[G] \ar[r, "\sim"] & \displaystyle\prod_{\sigma\in G}L_{\sigma} \\
+    l\otimes \sigma \ar[r, mapsto] & le_\sigma
+\end{tikzcd}\]
+
+It turns out that this map is natural, so there are a ton of ways to see it. For example, both sides are the induced module of the $K[G^{\op}]$-module $L$ equipped with a trivial right $G$-action.
+
+\section*{The End}
+
+As we noted, 
+
+\noindent Compiled on \todayymd.
+
+\noindent\home
+
+\end{document}
