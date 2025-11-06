@@ -1,13 +1,14 @@
 \documentclass{article}
 
 \usepackage{geometry}
-\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{amsfonts, amsmath, amssymb, amsthm, mathrsfs}
 \usepackage{enumitem}
 \usepackage{commands}
 \usepackage{mathtools}
 \usepackage{hyperref}
 \hypersetup{colorlinks, linkcolor={blue}, citecolor={blue}, urlcolor={blue}}
 
+\newcommand{\conts}{\cat{C}^0([0,1],\R)}
 
 \begin{document}
 \puttitle{Most continuous functions are nowhere differentiable}\self
@@ -26,22 +27,57 @@ The topic of this note is simply to show the Baire category theorem (BCT), which
     \end{itemize}
     This makes $B(x_i,r_i)$ a strictly descending sequence of open balls.
 
-    To conclude the proof, we need to show that $x_i$ is a Cauchy sequence, that its limit $x$ lies in $U_n$, and that its limit also lies in $V$.
-    This is clear, since we have
+    To conclude the proof, we need to show that $x_i$ is a Cauchy sequence (obvious), that its limit $x$ lies in all $U_n$, and that the limit $x$ lies in $V$.
+    We have
     \[
         x_k \in B(x_i,r_i), \quad \forall k\geq i\geq 1,
     \]
     \[
         \Longrightarrow\ x \in \overline{B(x_i,r_i)} \subset \overline{B(x_{i-1},\tfrac{1}{2}r_{i-1})} \subset D(x_{i-1},\tfrac{1}{2}r_{i-1}) \subset B(x_{i-1},r_{i-1})
     \]
-    for $i\geq 2$. Now, the last ball in the chain lies in $V$ if $i=2$, and in $U_{i-2}$ otherwise.
+    for $i\geq 2$. Now, the last term in the chain lies in $V$ if $i=2$, and in $U_{i-2}$ otherwise.
 \end{proof}
 
 \begin{remark}
     The result holds under a different assumption that $X$ is locally compact Hausdorff.
 \end{remark}
 
-Next, we give an application 
+\section{Main result}
+
+Next, we give an application which is the claim in the title: ``most'' continuous functions are differentiable.
+
+First, we need to find an appropriate notion of being a ``big'' subset of the space of continuous functions. This space is too \emph{big} (for example, it's not locally compact) to have a good measure, like the Lebesgue measure on $\R^n$. I believe this ``issue'' is handled to some extent in functional analysis, and namely, by the BCT. What we will prove is the following.
+\begin{theorem}
+    Let $\cal{A}$ be the subset of $\conts$ consisting of the functions that are nowhere differentiable on $(0,1)$. Under the uniform norm, $\cal{A}$ is dense in $\conts$.
+\end{theorem}
+
+I'll prove this in two steps.
+
+\subsection*{Step 1. more continuous than continous functions}
+
+As will be clear from the second step of the proof, we want these functions to be at least Lipchitz continuous, for us to do basically anything. 
+
+Thanks to the following theorem, we can dodge the danger of losing every brain cell from considering general continuous functions.
+
+\begin{theorem}[Stone-Weierstrass]
+    Polynomial functions are dense in $\conts$.
+\end{theorem}
+
+\begin{proof}
+    Given in Section \ref{pf}.
+\end{proof}
+
+\subsection*{Step 2. Apply BCT}
+
+A function in $\conts$ is differentiable at at least one point in (0,1) only if it lies in the union of
+\[
+    X_{n,m} := \bc{f:\exists x\in(0,1)\text{ s.t. }0<\abs{y-x}<\tfrac{1}{m}\implies\frac{\abs{f(y)-f(x)}}{\abs{y-x}}<n},
+\]
+so $A$ is the intersection of all $Y_{n,m}:=(X_{n,m})^{\mathrm{c}}$. By the BCT, it suffices to show that each $Y_{n,m}$ is dense. 
+
+
+
+\section{Proof of Stone-Weierstrass}\label{pf}
 
 \section*{The End}
 

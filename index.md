@@ -98,4 +98,8 @@ Creation of this page.
 [Nakayama's Lemma](https://caelestia.github.io/2025/1019.pdf)
 
 []()
+
+## 2025/Nov
+
+[Normal basis theorem](https://caelestia.github.io/2025/1104.pdf)
 <!-- append -->

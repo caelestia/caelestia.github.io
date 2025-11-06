@@ -152,9 +152,29 @@ This is given by
 
 It turns out that this map is natural, so there are a ton of ways to see it. For example, both sides are the induced module of the $K[G^{\op}]$-module $L$ equipped with a trivial right $G$-action.
 
+\subsection{QED}
+
+We could work with a left $G$-action, but it seems natural to define it as a right action. Perhaps the important thing is that, in either case, we need to define the action as $e_{\sigma}\mapsto e_{\sigma\tau^{\pm 1}}$.
+
 \section*{The End}
 
-As we noted, 
+As we noted, Proposition \ref{prop} holds for any field extension $L|K$, not just the finite ones. To see this, note that giving an isomorphism $L\otimes V\simeq L\otimes W$ is equivalent to giving two $n\times n$ ($n:=\dim V=\dim W$) matrices $A,B$ with entries in $L$, satisfying
+\begin{eqnarray*}
+    AB=BA=1_{n\times n}, & \\
+    A\phi_V(g)=\phi_W(g)A,\quad B\phi_W(g)=\phi_V(g)B & \ \forall g\in G.
+\end{eqnarray*}
+The $\phi_{(\cdot)}$ denotes the representations $G\longrightarrow\GL(\cdot)\simeq\Mat{n}(K)$. Hence the $2n^2$ entries of $A$ and $B$ are equivalently solutions of a family of polynomial equations with coefficients in $K$. Now apply
+
+\begin{lemma}
+    Let $\bc{P_i}$ be a (possibly infinite) family of polynomials in $K[X_1,X_2,\cdots,X_n]$. If they have a common zero over some field extension $L|K$, then they have a common zero over some finite extension of $K$.
+\end{lemma}
+
+\begin{proof}
+    This is a consequence of the weak Nullstellensatz.
+    Since the $P_i$ can not generate the ideal $(1)$, they must have a zero over $\overline{K}$ whose coordinates lies in an algebraic extension in $n$ generators.
+\end{proof}
+
+\hfill
 
 \noindent Compiled on \todayymd.
 
